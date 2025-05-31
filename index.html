@@ -1,0 +1,3078 @@
+
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>code_2025-05-22T21-36-53-052Z.html</title>
+                </head>
+                <body>
+                    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>code_2025-05-22T20-29-32-296Z.html</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>code_2025-05-22T18-47-28-900Z.html</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון הצעת מחיר משודרג עם חישוב שכר</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* Global Resets and Base Styles */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f2f5;
+            color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.4em;
+        }
+
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        h4 {
+            color: #34495e;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+            padding-bottom: 4px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.85em;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        input[type="file"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        
+        input.invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.25);
+        }
+        
+        .validation-message {
+            color: #dc3545;
+            font-size: 0.75em;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        input[type="file"]:focus,
+        input[type="time"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 0.15rem rgba(74, 144, 226, 0.25);
+            outline: none;
+        }
+
+        input[type="number"] {
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+
+        .service-quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+        }
+        
+        .quantity-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: bold;
+            padding: 1px 6px;
+            line-height: 1;
+            border-radius: 3px;
+            margin: 0 2px;
+            min-width: 22px;
+            height: 24px;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .quantity-btn:disabled {
+            background-color: #f8f9fa;
+            color: #aaa;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+
+        .service-quantity {
+            width: 45px !important;
+            padding: 4px 5px !important;
+            font-size: 0.85em !important;
+            margin: 0 !important;
+            text-align: center;
+            direction: ltr;
+        }
+        
+        .service-quantity:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        .section-card {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+        }
+
+        .service-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
+            min-height: 115px;
+            position: relative;
+        }
+
+        .service-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: #4a90e2;
+        }
+
+        .service-item.selected {
+            background-color: #e6f7ff;
+            border-color: #4a90e2;
+            color: #0056b3;
+        }
+
+        .service-item.selected .item-price {
+            color: #0056b3;
+        }
+        
+        .service-item .print-item-details {
+            display: none;
+        }
+
+        .service-item .item-name {
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 3px;
+            word-break: break-word;
+        }
+
+        .service-item .item-price {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 1em;
+            margin-bottom: 3px;
+        }
+
+        .service-item.selected::before {
+            content: '✔';
+            color: #4a90e2;
+            font-size: 1em;
+            font-weight: bold;
+            position: absolute;
+            top: 3px;
+            right: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 7px 10px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-align: center;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+            margin-top: 4px;
+            margin-right: 4px;
+        }
+        
+        .btn:last-child {
+            margin-right: 0;
+        }
+
+        .actions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 6px;
+        }
+        
+        .actions-container .btn {
+            width: 100%;
+            margin-right: 0;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary { background-color: #007bff; }
+        .btn-primary:hover { background-color: #0069d9; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; }
+        .btn-success { background-color: #28a745; }
+        .btn-success:hover { background-color: #218838; }
+        .btn-info { background-color: #17a2b8; }
+        .btn-info:hover { background-color: #138496; }
+        .btn-warning { background-color: #ffc107; color: #212529; }
+        .btn-warning:hover { background-color: #e0a800; }
+        .btn-danger {
+            background-color: #dc3545;
+            width: auto;
+        }
+        
+        .btn-danger:hover { background-color: #c82333; }
+        .btn-danger.btn-sm {
+            padding: 3px 6px !important;
+            font-size: 0.75em !important;
+        }
+
+        .summary p {
+            font-size: 1em;
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+        }
+        
+        .summary p span { font-weight: 700; }
+        /* הסתרת שורות עלות בסיסית וסה"כ לתשלום גם במסך */
+        .summary .hidden-on-screen { display: none; }
+
+        .summary #additionalEventCostsContainer { display: none; }
+        .summary #balanceDue { color: #dc3545; }
+        .summary #finalTotalCost { color: #28a745; font-size: 1.1em; }
+        .summary #eventDayPaymentDisplayContainer {
+            display: none;
+        }
+        /* Style for detailed payment rows in summary */
+        .summary .summary-detail-row {
+            font-size: 0.9em; /* Slightly smaller for sub-items */
+            padding-right: 15px; /* Indent sub-items */
+            color: #666;
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 15px;
+            border: none;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .modal-content.modal-lg {
+            max-width: 700px;
+        }
+
+        .close-button {
+            color: #777;
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            font-size: 1.6em;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+        
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #priceSettings { margin-top: 10px; }
+        
+        #priceSettings .price-setting-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 6px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        
+        #priceSettings label {
+            font-weight: 500;
+            flex-basis: auto;
+            margin-bottom: 0;
+            font-size: 0.85em;
+            flex-grow: 1;
+        }
+        
+        #priceSettings input[type="number"] {
+            width: auto;
+            flex-basis: 30%;
+            margin: 0;
+            text-align: left;
+            direction: ltr;
+            font-size: 0.85em;
+            padding: 6px;
+        }
+        
+        #priceSettings .btn-danger {
+            flex-basis: auto;
+            margin-left: 10px;
+        }
+
+        .settings-section-item {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .settings-section-item:first-child {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+        
+        .settings-section-item label { margin-bottom: 4px; }
+        
+        .settings-section-item input[type="file"],
+        .settings-section-item input[type="text"],
+        .settings-section-item input[type="tel"],
+        .settings-section-item input[type="email"] {
+            margin-bottom: 8px;
+        }
+
+        #logoPreview {
+            max-width: 180px;
+            max-height: 90px;
+            display: block;
+            margin-top: 8px;
+            border: 1px solid #ddd;
+            padding: 4px;
+        }
+        
+        #logoPreview:not([src]), #logoPreview[src="#"] {
+            display: none;
+        }
+
+        .add-service-form {
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .add-service-form h4 {
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+        
+        .add-service-form input[type="text"],
+        .add-service-form input[type="number"] {
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+        
+        .add-service-form .btn {
+            font-size: 0.9em;
+            margin-top: 0;
+        }
+
+        .modal-open { overflow: hidden; }
+        
+        .feedback-message {
+            text-align: center;
+            padding: 6px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            display: none;
+            font-size: 0.85em;
+        }
+        
+        .feedback-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .feedback-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        /* Styles for Saved Quotes List */
+        .saved-quotes-list-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: #fff;
+        }
+        
+        .quote-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+        
+        .quote-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .quote-list-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .quote-list-item-info {
+            flex-grow: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+        
+        .quote-list-item-name {
+            font-weight: 600;
+            color: #0056b3;
+        }
+        
+        .quote-list-item-date {
+            font-size: 0.85em;
+            color: #777;
+            margin-right: 10px;
+        }
+        
+        .quote-list-item-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .quote-list-item-actions .btn {
+            padding: 4px 8px;
+            font-size: 0.75em;
+            line-height: 1.3;
+            margin: 0;
+        }
+        
+        .quote-list-item-actions .btn-wage {
+            font-size: 0.9em !important;
+            padding: 6px 12px !important;
+            min-width: 90px;
+            background-color: #ffc107;
+            color: #212529;
+        }
+        
+        .quote-list-item-actions .btn-wage:hover {
+            background-color: #e0a800;
+        }
+
+        .no-saved-quotes-message {
+            text-align: center;
+            padding: 15px;
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        #searchSavedQuotes { margin-bottom: 8px; }
+
+        /* Signature Pad Styles */
+        #signatureCanvas {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: crosshair;
+            touch-action: none;
+        }
+        
+        .signature-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .signature-display img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+            margin-top: 10px;
+        }
+        
+        .payment-split-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px; /* Gap between the two payment fields */
+            margin-top: 10px;
+            margin-bottom: 10px; /* Add some margin below */
+        }
+
+        .payment-split-item {
+            flex-basis: 48%; /* Each item takes roughly half the space */
+        }
+        .payment-split-item label {
+            font-size: 0.8em; /* Slightly smaller label if needed */
+        }
+         .payment-split-item input[type="number"] {
+            width: 100% !important; /* Ensure input takes full width of its container */
+        }
+
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0.6; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.2em; }
+            h3 { font-size: 1.05em; }
+            
+            .actions-container {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            }
+            
+            #priceSettings label { flex-basis: 100%; margin-bottom: 3px;}
+            #priceSettings input[type="number"] { flex-basis: 55%; }
+            #priceSettings .btn-danger { flex-basis: 35%; margin-left: 0; margin-top: 5px;}
+        }
+
+        @media (max-width: 480px) {
+            .services {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+            
+            h1 { font-size: 1.4em; margin-bottom: 12px;}
+            .btn { padding: 7px; font-size: 0.8em; }
+            .service-item { min-height: 115px; padding: 6px;}
+            .service-item .item-name { font-size: 0.8em; }
+            .service-item .item-price { font-size: 0.95em; }
+            .modal-content { margin: 5% auto; padding: 10px; }
+
+            #priceSettings .price-setting-item {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            #priceSettings label,
+            #priceSettings input[type="number"],
+            #priceSettings .btn-danger {
+                flex-basis: auto;
+                width: 100%;
+                margin-left: 0;
+            }
+            
+            #priceSettings input[type="number"] { margin-bottom: 5px; }
+
+            .actions-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .actions-container .btn {
+                margin-bottom: 6px;
+            }
+            
+            .quote-list-item-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quote-list-item-date {
+                margin-right: 0;
+                margin-top: 2px;
+            }
+            
+            .quote-list-item-actions {
+                gap: 8px;
+            }
+            
+            .quote-list-item-actions .btn-wage {
+                font-size: 0.8em !important;
+                padding: 5px 10px !important;
+                min-width: 80px;
+            }
+            
+            .quote-list-item-actions .btn {
+                font-size: 0.7em !important;
+                padding: 3px 6px !important;
+            }
+        }
+        
+        .print-hide-on-screen { display: none !important; } /* שינוי: הוספת !important */
+        
+        @media print {
+            body {
+                background-color: #fff !important;
+                padding: 0;
+                font-size: 10pt;
+                color: #000 !important;
+            }
+            
+            .container {
+                width: 100% !important;
+                max-width: none !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                padding: 20px !important;
+            }
+
+            .section-card {
+                border: 1px solid #ccc !important;
+                padding: 8px !important;
+                margin-bottom: 10px !important;
+                background-color: #fff !important;
+            }
+            
+            h1, h2, h3, h4 { color: #000 !important; font-weight: bold; }
+            h1 { font-size: 1.6em; margin-bottom: 15px; text-align: center; }
+            h2 { font-size: 1.3em; margin-bottom: 10px; border-bottom: 1px solid #888; }
+            h3 { font-size: 1.1em; margin-bottom: 8px; }
+            
+            label { font-size: 0.9em; font-weight: bold; }
+            
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="date"],
+            input[type="number"],
+            textarea {
+                border-bottom: 1px dotted #999 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 2px 0 !important;
+                background-color: #fff !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                font-weight: normal;
+            }
+            
+            input:read-only, textarea:read-only {
+                border-bottom: none !important;
+                padding-left: 0 !important;
+                font-weight: bold;
+            }
+            
+            .client-details label { display: inline !important; font-weight: bold !important; margin-left: 5px;}
+            .client-details input, .client-details textarea { display: inline !important; width: auto !important; border: none !important; font-weight: bold;}
+
+            .actions-section,
+            .saved-quotes-section,
+            #settingsBtn,
+            #calculationSettingsBtn,
+            .service-quantity-control button,
+            .modal,
+            #searchSavedQuotes,
+            .quote-list-item-actions button,
+            #logoFileInput,
+            #removeLogoBtn,
+            #importFileInput, 
+            #importDataBtn,
+            .add-service-form,
+            #saveSettingsBtn,
+            #eventWageModal, 
+            #signatureModal,
+            .print-hide { /* הסרת print-hide-on-screen מהרשימה כאן, כי הוא כבר יוסתר בגלל !important */
+                display: none !important;
+            }
+            /* exportDataBtn כבר מוסתר באמצעות print-hide */
+            
+            /* הסתרת שורות פירוט התשלום בהדפסה אם הן לא רלוונטיות שם */
+            .summary .summary-detail-row { display: none !important; }
+            /* הסתרת שורות הסכום הכולל ועודף בהדפסה - כבר בוצע */
+            /* הפיכת שורות הסיכום לבלוקים רגילים בהדפסה */
+            .summary p {
+                display: block !important;
+                padding: 2px 0 !important;
+                font-size: 0.95em !important;
+            }
+            /* יישור של הטקסטים בהדפסה */
+            .summary p span {
+                float: left; /* מיישר את הסכום לשמאל */
+                margin-left: 10px; /* מרווח קטן מהטקסט */
+                font-weight: normal !important; /* הסרת בולד מהמספר */
+            }
+            .summary p strong {
+                font-weight: bold !important;
+                display: inline-block; /* כדי לאפשר ל-float לעבוד */
+            }
+            /* לוודא שהיתרה לתשלום עדיין מוצגת ובעלת צבע */
+            .summary #balanceDue {
+                color: #000 !important; /* שחור בהדפסה */
+            }
+            .summary p.balance-due strong {
+                font-size: 1em !important;
+            }
+            .summary p.balance-due span {
+                font-size: 1em !important;
+            }
+
+
+            .client-details, .services-section, .payment-section, .summary {
+                page-break-inside: avoid;
+            }
+
+            #printHeaderDiv {
+                display: flex !important;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+                border-bottom: 2px solid #333;
+            }
+            
+            #printedLogo {
+                display: block !important;
+                max-width: 180px !important;
+                max-height: 90px !important;
+                object-fit: contain;
+            }
+            
+            .print-header-info {
+                text-align: right;
+                font-size: 0.95em;
+            }
+            
+            .print-header-info p { margin: 2px 0; font-weight: normal; }
+            .print-header-info p strong { font-weight: bold; }
+
+            .services-section h2 { margin-bottom: 5px;}
+            
+            .services {
+                display: block !important;
+            }
+            
+            .service-item {
+                display: block !important;
+                padding: 6px 0 !important;
+                margin-bottom: 4px !important;
+                border: none !important;
+                border-bottom: 1px dotted #bbb !important;
+                background-color: #fff !important;
+                box-shadow: none !important;
+            }
+            
+            .service-item:not(.selected) { display: none !important; }
+            
+            .service-item .item-name,
+            .service-item .item-price,
+            .service-item .service-quantity-control,
+            .service-item .print-item-details {
+                display: inline !important;
+                margin-right: 10px;
+                font-size: 0.95em !important;
+            }
+            
+            .service-item .item-name { font-weight: bold; }
+            .service-item .item-price { display: none !important; }
+            .service-item .service-quantity-control { display: none !important;}
+
+            .service-item .print-item-details span { margin-right: 8px; }
+            .service-item .print-item-details .print-item-total strong,
+            .service-item .print-item-details .print-item-ppu strong,
+            .service-item .print-item-details .print-item-qty strong { font-weight: bold; }
+
+            .summary { margin-top: 20px; }
+            .summary h2 { margin-bottom: 5px; }
+            /* הסרת display: flex מ-summary p בהדפסה כדי שהלוגיקה של float תעבוד */
+            .summary p {
+                display: block !important; /* שינוי: מבלוק ולא פלקס */
+                padding: 3px 0;
+            }
+            
+            /* הוספת float ו-width לטקסט ולסכום כדי ליישר בשורות נפרדות בהדפסה */
+            .summary p strong {
+                float: right;
+                clear: right; /* וודא שהטקסט לא מתחיל בשורה הקודמת */
+                width: auto; /* מאפשר לתוכן לקבוע את הרוחב */
+            }
+            .summary p span {
+                float: left;
+                width: auto;
+                text-align: left;
+            }
+            /* טיפול בסכום הכולל ויתרה לתשלום בהדפסה */
+            .summary p.total strong, .summary p.total span,
+            .summary p.balance-due strong, .summary p.balance-due span {
+                font-weight: bold !important;
+            }
+
+            .summary #finalTotalCost span { color: #000 !important; }
+            .summary #balanceDue span { color: #000 !important; }
+
+            #quoteNotes {
+                margin-top:15px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                min-height: 50px;
+                white-space: pre-wrap;
+                background-color: #fdfdfd !important;
+                font-weight: normal;
+            }
+            
+            #quoteNotes:empty::before {
+                content: "אין הערות.";
+                color: #777;
+                font-style: italic;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="printHeaderDiv" class="print-hide">
+            <img id="printedLogo" src="#" alt="לוגo העסק">
+            <div class="print-header-info">
+                <p><strong id="printedBusinessName"></strong></p>
+                <p id="printedBusinessPhone"></p>
+                <p id="printedBusinessEmail"></p>
+            </div>
+        </div>
+
+        <h1>מחשבון הצעת מחיר וניהול אירוע</h1>
+
+        <div class="client-details section-card">
+            <h2>פרטי לקוח ואירוע</h2>
+            <label for="clientName">שם הלקוח:</label>
+            <input type="text" id="clientName" name="clientName">
+            <label for="clientPhone">טלפון הלקוח:</label>
+            <input type="tel" id="clientPhone" name="clientPhone">
+            <div id="clientPhoneValidation" class="validation-message">מספר הטלפון אינו תקין</div>
+            <label for="clientEmail">אימייל הלקוח:</label>
+            <input type="email" id="clientEmail" name="clientEmail">
+            <div id="clientEmailValidation" class="validation-message">כתובת האימייל אינה תקינה</div>
+
+            <label for="eventDate">תאריך האירוע:</label>
+            <input type="date" id="eventDate" name="eventDate">
+            <label for="venueName">שם האולם/מקום:</label>
+            <input type="text" id="venueName" name="venueName">
+
+            <label for="quoteNotes">הערות להצעה:</label>
+            <textarea id="quoteNotes" name="quoteNotes" placeholder="הערות, תנאים מיוחדים וכו'..."></textarea>
+        </div>
+
+        <div class="payment-section section-card">
+            <h2>תשלום</h2>
+            <label for="amountPaid">סכום ששולם (מקדמה):</label>
+            <input type="number" id="amountPaid" value="0" min="0">
+        </div>
+
+        <div class="services-section section-card">
+            <h2>בחר שירותים:</h2>
+            <div class="services"></div>
+        </div>
+
+        <div class="summary section-card">
+            <h2>סיכום</h2>
+            <p class="hidden-on-screen">סה"כ עלות שירותים בסיסית: <span id="baseServicesCost">0</span> ₪</p>
+            <div id="additionalEventCostsContainer">
+                <p>עלויות נוספות (שעות/הוצאות): <span id="additionalEventCostsDisplay">0</span> ₪</p>
+            </div>
+            <div id="eventTimesDisplayContainer" style="display: none;">
+                <p class="summary-detail-row"><strong>שעת התחלה באירוע:</strong> <span id="eventStartTimeDisplay"></span></p>
+                <p class="summary-detail-row"><strong>שעת סיום באירוע:</strong> <span id="eventEndTimeDisplay"></span></p>
+            </div>
+            <p style="font-weight:bold; color: #28a745; font-size:1.1em;" class="hidden-on-screen">סה"כ לתשלום: <span id="finalTotalCost">0</span> ₪</p>
+            <hr style="margin: 5px 0;">
+            <div id="eventDayPaymentDisplayContainer">
+                <p>סכום ששולם באירוע: <span id="eventDayPaymentDisplay">0</span> ₪</p>
+            </div>
+            <p style="font-weight:bold;">סה"כ שולם (מקדמה + באירוע): <span id="totalPaidDisplay">0</span> ₪</p>
+            <p class="summary-detail-row"><strong>מתוכו שולם כללי באירוע:</strong> <span id="mainEventPaymentSummary">0</span> ₪</p>
+            <p class="summary-detail-row"><strong>מתוכו שולם ע"י צד חתן:</strong> <span id="groomSidePaymentSummary">0</span> ₪</p>
+            <p class="summary-detail-row"><strong>מתוכו שולם ע"י צד כלה:</strong> <span id="brideSidePaymentSummary">0</span> ₪</p>
+            <p style="font-weight:bold; color: #dc3545; font-size:1.1em;">יתרה לתשלום: <span id="balanceDue">0</span> ₪</p>
+        </div>
+
+        <div class="actions-section section-card">
+            <h2>פעולות</h2>
+            <div class="actions-container">
+                <button id="saveQuoteBtn" class="btn btn-success">שמור פרטי הצעה</button>
+                <button id="exportToHtmlBtn" class="btn btn-primary">ייצא כדף אינטרנט</button>
+                <button id="convertToPdfBtn" class="btn btn-primary" style="display:none;">המרה ל-PDF</button>
+                <button id="addToGoogleCalendarBtn" class="btn btn-info">הוסף ליומן</button>
+                <button id="settingsBtn" class="btn btn-secondary">הגדרות מערכת</button>
+                <button id="calculationSettingsBtn" class="btn btn-secondary">הגדרות חישוב שכר</button>
+                <button id="exportDataBtn" class="btn btn-secondary print-hide">ייצא נתונים</button>
+            </div>
+            <div id="feedbackMessage" class="feedback-message"></div>
+        </div>
+
+        <div class="saved-quotes-section section-card">
+            <h3>הצעות שמורות</h3>
+            <label for="searchSavedQuotes">חפש הצעות שמורות:</label>
+            <input type="text" id="searchSavedQuotes" placeholder="הקלד שם לקוח, תאריך, הערה...">
+            <div id="savedQuotesListContainer" class="saved-quotes-list-container"></div>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>הגדרת מחירי שירותים ומערכת</h2>
+            <div class="settings-section-item">
+                <h4>פרטי העסק שלך (יופיעו בהדפסה)</h4>
+                <label for="businessNameInput">שם העסק:</label>
+                <input type="text" id="businessNameInput" placeholder="העסק שלי">
+                <label for="businessPhoneInput">טלפון העסק:</label>
+                <input type="tel" id="businessPhoneInput" placeholder="050-1234567">
+                <label for="businessEmailInput">אימייל העסק:</label>
+                <input type="email" id="businessEmailInput" placeholder="mybusiness@example.com">
+            </div>
+            <div id="priceSettings" class="settings-section-item">
+                <h4>הגדרת מחירי שירותים</h4>
+            </div>
+            <div class="add-service-form settings-section-item">
+                <h4>הוספת שירות חדש</h4>
+                <label for="newServiceName">שם השירות החדש:</label>
+                <input type="text" id="newServiceName" placeholder="לדוגמה: מגנטים">
+                <label for="newServicePrice">מחיר השירות החדש (₪):</label>
+                <input type="number" id="newServicePrice" placeholder="לדוגמה: 500" min="0">
+                <button id="addNewServiceBtn" class="btn btn-info" style="width: auto; padding: 6px 10px; font-size: 0.85em;">הוסף שירות</button>
+            </div>
+            <div class="logo-setting-item settings-section-item">
+                <h4>הגדרות לוגו (להדפסה)</h4>
+                <label for="logoFileInput">העלה קובץ לוגו (עד 1MB, מומלץ PNG/JPEG):</label>
+                <input type="file" id="logoFileInput" accept="image/png, image/jpeg, image/gif">
+                <img id="logoPreview" src="#" alt="תצוגה מקדימה של לוגו">
+                <button id="removeLogoBtn" class="btn btn-danger btn-sm" style="width:auto; margin-top:5px; font-size:0.75em; padding: 3px 6px;">הסר לוגו</button>
+            </div>
+            <div class="settings-section-item">
+                <h4>גיבוי ושחזור נתונים</h4>
+                <hr>
+                <label for="importFileInput" style="margin-top:10px;">ייבא נתונים מקובץ גיבוי (JSON):</label>
+                <input type="file" id="importFileInput" accept=".json" style="margin-bottom:5px;">
+                <button id="importDataBtn" class="btn btn-warning" style="width:auto; padding: 6px 10px; font-size: 0.85em;">טען נתונים</button>
+            </div>
+            <hr style="margin: 15px 0;">
+            <button id="saveSettingsBtn" class="btn btn-secondary" style="width: 100%;">שמור את כל ההגדרות</button>
+        </div>
+    </div>
+
+    <div id="calculationSettingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>הגדרות חישוב שכר</h2>
+            <div class="settings-section-item">
+                <label for="standardWorkHours">שעות עבודה סטנדרטיות לאירוע (מעבר להן יחושב כשעות נוספות):</label>
+                <input type="number" id="standardWorkHours" min="0" placeholder="לדוגמה: 8">
+            </div>
+            <div class="settings-section-item">
+                <label for="overtimeRate">תעריף לשעה נוספת (₪):</label>
+                <input type="number" id="overtimeRate" min="0" placeholder="לדוגמה: 150">
+            </div>
+            <hr style="margin: 15px 0;">
+            <button id="saveCalculationSettingsBtn" class="btn btn-success" style="width: 100%;">שמור הגדרות חישוב</button>
+        </div>
+    </div>
+
+    <div id="eventWageModal" class="modal">
+        <div class="modal-content modal-lg">
+            <span class="close-button">&times;</span>
+            <h2 id="eventWageModalTitle">חישוב שכר ותשלום לאירוע</h2>
+            <input type="hidden" id="currentQuoteIdForWage">
+            <div class="settings-section-item">
+                <h4>פרטי שעות עבודה</h4>
+                <label for="eventStartTime">שעת התחלה:</label>
+                <input type="time" id="eventStartTime">
+                <label for="eventEndTime">שעת סיום:</label>
+                <input type="time" id="eventEndTime">
+                <p>סה"כ שעות עבודה: <span id="totalEventHoursDisplay">0</span> שעות</p>
+                <p>שעות סטנדרט: <span id="regularHoursDisplay">0</span>, שעות נוספות: <span id="overtimeHoursDisplay">0</span></p>
+            </div>
+            <div class="settings-section-item">
+                <h4>עלויות נוספות (יצורפו לחשבון הלקוח)</h4>
+                <label for="eventExtrasCost">תוספות/הוצאות אחרות (₪):</label>
+                <input type="number" id="eventExtrasCost" min="0" value="0">
+            </div>
+            <div class="settings-section-item">
+                <h4>חישוב עלויות נוספות ללקוח (עבור שעות נוספות והוצאות)</h4>
+                <button id="calculatePhotographerWageBtn" class="btn btn-info">חשב עלויות נוספות</button>
+                <p style="font-weight: bold; font-size: 1.1em; margin-top: 10px;">סך עלויות נוספות לחיוב: <span id="calculatedPhotographerWageDisplay">0</span> ₪</p>
+            </div>
+            <div class="settings-section-item">
+                <h4>אישור תשלום וחתימה</h4>
+                <label for="signatoryName">שם החותם (הלקוח):</label>
+                <input type="text" id="signatoryName" placeholder="שם מלא של הלקוח המאשר">
+                
+                <label for="amountPaidToPhotographer">סכום ראשי ששולם באירוע (בנוסף למקדמה):</label>
+                <input type="number" id="amountPaidToPhotographer" min="0" value="0" placeholder="הסכום שהועבר באירוע">
+
+                <div class="payment-split-container">
+                    <div class="payment-split-item">
+                        <label for="paymentGroomSide">תשלום צד חתן (₪):</label>
+                        <input type="number" id="paymentGroomSide" min="0" value="0">
+                    </div>
+                    <div class="payment-split-item">
+                        <label for="paymentBrideSide">תשלום צד כלה (₪):</label>
+                        <input type="number" id="paymentBrideSide" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+            <div id="signatureDisplayArea" class="signature-display" style="margin-top:15px; padding-top:10px; border-top: 1px solid #eee;">
+                <h4>חתימה שמורה:</h4>
+                <img id="savedSignatureImage" src="#" alt="חתימה" style="display:none; border:1px solid #ccc; padding:5px; max-width:300px; margin: 5px auto; display:block;">
+                <p id="noSignatureMessage" style="text-align:center; color: #777;">אין חתימה שמורה לאירוע זה.</p>
+            </div>
+            <hr style="margin: 20px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button id="openSignaturePadBtn" class="btn btn-success">פתח חלון חתימה</button>
+                <button id="saveEventWageDetailsBtn" class="btn btn-primary">שמור פרטי עלויות, תשלום וחתימה</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="signatureModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>חתימת לקוח על אישור תשלום</h2>
+            <p>אני, <strong id="signatureModalSignatoryName"></strong>, מאשר את פרטי התשלום והעלויות הנוספות כפי שפורטו.</p>
+            <p>הסכום ששולם כעת (באירוע): <strong id="signatureModalAmountPaid"></strong> ₪.</p>
+            <p>חותם בתאריך: <span id="signatureModalTimestamp"></span></p>
+            <canvas id="signatureCanvas" width="450" height="200"></canvas>
+            <div class="signature-actions">
+                <button id="clearSignatureBtn" class="btn btn-secondary">נקה חתימה</button>
+                <button id="confirmSignatureBtn" class="btn btn-success">אשר ושמור חתימה</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Elements ---
+            const servicesContainer = document.querySelector('.services');
+            const baseServicesCostEl = document.getElementById('baseServicesCost');
+            const additionalEventCostsContainerEl = document.getElementById('additionalEventCostsContainer');
+            const additionalEventCostsDisplayEl = document.getElementById('additionalEventCostsDisplay');
+            const finalTotalCostEl = document.getElementById('finalTotalCost');
+            const balanceDueEl = document.getElementById('balanceDue');
+            const amountPaidInput = document.getElementById('amountPaid');
+            const clientNameInput = document.getElementById('clientName');
+            const clientPhoneInput = document.getElementById('clientPhone');
+            const clientEmailInput = document.getElementById('clientEmail');
+            const eventDateInput = document.getElementById('eventDate');
+            const venueNameInput = document.getElementById('venueName');
+            const settingsBtn = document.getElementById('settingsBtn');
+            const settingsModal = document.getElementById('settingsModal');
+            const closeBtns = document.querySelectorAll('.close-button');
+            const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+            const priceSettingsContainer = document.getElementById('priceSettings');
+            const saveQuoteBtn = document.getElementById('saveQuoteBtn');
+            const exportToHtmlBtn = document.getElementById('exportToHtmlBtn');
+            const convertToPdfBtn = document.getElementById('convertToPdfBtn');
+            const addToGoogleCalendarBtn = document.getElementById('addToGoogleCalendarBtn');
+            const feedbackMessageEl = document.getElementById('feedbackMessage');
+            const savedQuotesListContainer = document.getElementById('savedQuotesListContainer');
+            const bodyEl = document.body;
+            const newServiceNameInput = document.getElementById('newServiceName');
+            const newServicePriceInput = document.getElementById('newServicePrice');
+            const addNewServiceBtn = document.getElementById('addNewServiceBtn');
+            const quoteNotesEl = document.getElementById('quoteNotes');
+            const searchSavedQuotesInput = document.getElementById('searchSavedQuotes');
+            const logoFileInput = document.getElementById('logoFileInput');
+            const logoPreview = document.getElementById('logoPreview');
+            const removeLogoBtn = document = document.getElementById('removeLogoBtn');
+            const businessNameInput = document.getElementById('businessNameInput');
+            const businessPhoneInput = document.getElementById('businessPhoneInput');
+            const businessEmailInput = document.getElementById('businessEmailInput');
+            const exportDataBtn = document.getElementById('exportDataBtn');
+            const importFileInput = document.getElementById('importFileInput');
+            const importDataBtn = document.getElementById('importDataBtn');
+            const eventDayPaymentDisplayContainer = document.getElementById('eventDayPaymentDisplayContainer');
+            const eventDayPaymentDisplay = document.getElementById('eventDayPaymentDisplay');
+            const totalPaidDisplay = document.getElementById('totalPaidDisplay');
+            const calculationSettingsBtn = document.getElementById('calculationSettingsBtn');
+            const calculationSettingsModal = document.getElementById('calculationSettingsModal');
+            const saveCalculationSettingsBtn = document.getElementById('saveCalculationSettingsBtn');
+            const standardWorkHoursInput = document.getElementById('standardWorkHours');
+            const overtimeRateInput = document.getElementById('overtimeRate');
+            const eventWageModal = document.getElementById('eventWageModal');
+            const eventWageModalTitle = document.getElementById('eventWageModalTitle');
+            const currentQuoteIdForWageInput = document.getElementById('currentQuoteIdForWage');
+            const eventStartTimeInput = document.getElementById('eventStartTime');
+            const eventEndTimeInput = document.getElementById('eventEndTime');
+            const totalEventHoursDisplay = document.getElementById('totalEventHoursDisplay');
+            const regularHoursDisplay = document.getElementById('regularHoursDisplay');
+            const overtimeHoursDisplay = document.getElementById('overtimeHoursDisplay');
+            // const eventTravelCostInput = document.getElementById('eventTravelCost'); // Removed
+            const eventExtrasCostInput = document.getElementById('eventExtrasCost');
+            const calculatePhotographerWageBtn = document.getElementById('calculatePhotographerWageBtn');
+            const calculatedPhotographerWageDisplay = document.getElementById('calculatedPhotographerWageDisplay');
+            const signatoryNameInput = document.getElementById('signatoryName');
+            const amountPaidToPhotographerInput = document.getElementById('amountPaidToPhotographer');
+            const paymentGroomSideInput = document.getElementById('paymentGroomSide');
+            const paymentBrideSideInput = document.getElementById('paymentBrideSide');
+            const openSignaturePadBtn = document.getElementById('openSignaturePadBtn');
+            const saveEventWageDetailsBtn = document.getElementById('saveEventWageDetailsBtn');
+            const signatureDisplayArea = document.getElementById('signatureDisplayArea');
+            const savedSignatureImage = document.getElementById('savedSignatureImage');
+            const noSignatureMessage = document.getElementById('noSignatureMessage');
+            const signatureModal = document.getElementById('signatureModal');
+            const signatureModalSignatoryName = document.getElementById('signatureModalSignatoryName');
+            const signatureModalAmountPaid = document.getElementById('signatureModalAmountPaid');
+            const signatureModalTimestamp = document.getElementById('signatureModalTimestamp');
+            const signatureCanvas = document.getElementById('signatureCanvas');
+            const clearSignatureBtn = document.getElementById('clearSignatureBtn');
+            const confirmSignatureBtn = document.getElementById('confirmSignatureBtn');
+            const printHeaderDiv = document.getElementById('printHeaderDiv');
+            const printedLogo = document.getElementById('printedLogo');
+            const printedBusinessName = document.getElementById('printedBusinessName');
+            const printedBusinessPhone = document.getElementById('printedBusinessPhone');
+            const printedBusinessEmail = document.getElementById('printedBusinessEmail');
+            const clientPhoneValidation = document.getElementById('clientPhoneValidation');
+            const clientEmailValidation = document.getElementById('clientEmailValidation');
+
+            // אלמנטים לסיכום צד חתן/כלה/ראשי
+            const mainEventPaymentSummary = document.getElementById('mainEventPaymentSummary');
+            const groomSidePaymentSummary = document.getElementById('groomSidePaymentSummary');
+            const brideSidePaymentSummary = document.getElementById('brideSidePaymentSummary');
+
+            // אלמנטים חדשים לשעות התחלה/סיום באירוע
+            const eventTimesDisplayContainer = document.getElementById('eventTimesDisplayContainer');
+            const eventStartTimeDisplay = document.getElementById('eventStartTimeDisplay');
+            const eventEndTimeDisplay = document.getElementById('eventEndTimeDisplay');
+
+
+            // Initialize signature canvas
+            if (signatureCanvas) {
+                const signatureCtx = signatureCanvas.getContext('2d');
+                let drawing = false;
+                let lastPos = { x: 0, y: 0 };
+
+                function getMousePos(canvasDom, event) {
+                    const rect = canvasDom.getBoundingClientRect();
+                    const scaleX = canvasDom.width / rect.width;
+                    const scaleY = canvasDom.height / rect.height;
+                    return {
+                        x: (event.clientX - rect.left) * scaleX,
+                        y: (event.clientY - rect.top) * scaleY
+                    };
+                }
+
+                function getTouchPos(canvasDom, touchEvent) {
+                    const rect = canvasDom.getBoundingClientRect();
+                    const scaleX = canvasDom.width / rect.width;
+                    const scaleY = canvasDom.height / rect.height;
+                    return {
+                        x: (touchEvent.touches[0].clientX - rect.left) * scaleX,
+                        y: (touchEvent.touches[0].clientY - rect.top) * scaleY
+                    };
+                }
+
+                function drawLine(x1, y1, x2, y2) {
+                    signatureCtx.beginPath();
+                    signatureCtx.strokeStyle = 'black';
+                    signatureCtx.lineWidth = 2;
+                    signatureCtx.moveTo(x1, y1);
+                    signatureCtx.lineTo(x2, y2);
+                    signatureCtx.stroke();
+                    signatureCtx.closePath();
+                }
+
+                signatureCanvas.addEventListener('mousedown', (e) => {
+                    drawing = true;
+                    lastPos = getMousePos(signatureCanvas, e);
+                });
+
+                signatureCanvas.addEventListener('mouseup', () => drawing = false);
+                signatureCanvas.addEventListener('mousemove', (e) => {
+                    if (!drawing) return;
+                    const mousePos = getMousePos(signatureCanvas, e);
+                    drawLine(lastPos.x, lastPos.y, mousePos.x, mousePos.y);
+                    lastPos = mousePos;
+                });
+
+                signatureCanvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    drawing = true;
+                    lastPos = getTouchPos(signatureCanvas, e);
+                }, { passive: false });
+
+                signatureCanvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    drawing = false;
+                }, { passive: false });
+
+                signatureCanvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (!drawing) return;
+                    const touchPos = getTouchPos(signatureCanvas, e);
+                    drawLine(lastPos.x, lastPos.y, touchPos.x, touchPos.y);
+                    lastPos = touchPos;
+                }, { passive: false });
+
+                if (clearSignatureBtn) {
+                    clearSignatureBtn.addEventListener('click', () => {
+                        signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+                    });
+                }
+
+                if (confirmSignatureBtn) {
+                    confirmSignatureBtn.addEventListener('click', () => {
+                        if (signatureCanvas.toDataURL() === document.createElement('canvas').toDataURL()) {
+                            showFeedback("החתימה ריקה. יש לחתום על המסך.", "error");
+                            return;
+                        }
+                        
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = signatureCanvas.width;
+                        tempCanvas.height = signatureCanvas.height + 60; // Make space for text below
+                        const tempCtx = tempCanvas.getContext('2d');
+                        tempCtx.fillStyle = "white"; // Ensure background is white
+                        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.drawImage(signatureCanvas, 0, 0); // Draw signature
+                        
+                        // Add text below signature
+                        tempCtx.fillStyle = 'black';
+                        tempCtx.font = '14px Arial';
+                        tempCtx.textAlign = 'right'; // Align text to the right for RTL consistency
+                        
+                        const signatory = signatoryNameInput.value.trim();
+                        const paymentMain = parseFloat(amountPaidToPhotographerInput.value || 0);
+                        const paymentGroom = parseFloat(paymentGroomSideInput.value || 0);
+                        const paymentBride = parseFloat(paymentBrideSideInput.value || 0);
+                        const totalEventPayment = paymentMain + paymentGroom + paymentBride;
+                        const amountText = totalEventPayment.toLocaleString() + " ₪";
+
+                        const timestamp = new Date().toLocaleString('he-IL', {dateStyle: 'short', timeStyle: 'short'});
+                        
+                        tempCtx.fillText(`שם החותם: ${signatory}`, tempCanvas.width - 10, signatureCanvas.height + 20);
+                        tempCtx.fillText(`סכום ששולם באירוע: ${amountText}`, tempCanvas.width - 10, signatureCanvas.height + 38);
+                        tempCtx.fillText(`תאריך חתימה: ${timestamp}`, tempCanvas.width - 10, signatureCanvas.height + 56);
+                        
+                        currentSignatureDataUrl = tempCanvas.toDataURL('image/png');
+                        savedSignatureImage.src = currentSignatureDataUrl;
+                        savedSignatureImage.style.display = 'block';
+                        noSignatureMessage.style.display = 'none';
+                        
+                        showFeedback("חתימה נקלטה. יש לשמור פרטי עלויות ואישור תשלום.", "success");
+                        closeModal(signatureModal);
+                    });
+                }
+            }
+
+            let currentSignatureDataUrl = null;
+            let importedFileContent = null;
+            let serviceItems = [];
+            let appSettings = { logoDataUrl: '', businessName: '', businessPhone: '', businessEmail: '' };
+            let calculationSettings = { standardWorkHours: 8, overtimeRate: 150 };
+            let editingQuoteId = null;
+            let currentlyLoadedQuoteData = null;
+            let autoSaveInterval;
+
+            const defaultServiceItems = [
+                { id: 'digitalAlbum', name: 'אלבום דיגיטלי', price: 300, selected: false, quantity: 1 },
+                { id: 'parentsAlbum', name: 'אלבום הורים', price: 450, selected: false, quantity: 1 },
+                { id: 'pocketAlbum', name: 'אלבום כיסים', price: 200, selected: false, quantity: 1 },
+                { id: 'femalePhotographer', name: 'צלמת', price: 2500, selected: false, quantity: 1 },
+                { id: 'videographer', name: 'צלם ווידאו', price: 3000, selected: false, quantity: 1 },
+                { id: 'fullEditing', name: 'עריכה מלאה', price: 1200, selected: false, quantity: 1 },
+                { id: 'basicEditing', name: 'עריכה בסיסית', price: 600, selected: false, quantity: 1 }
+            ];
+
+            // --- Helper Functions ---
+            function showFeedback(message, type = 'success', duration = 3500) {
+                feedbackMessageEl.textContent = message;
+                feedbackMessageEl.className = `feedback-message ${type}`;
+                feedbackMessageEl.style.display = 'block';
+                setTimeout(() => {
+                    feedbackMessageEl.style.display = 'none';
+                }, duration);
+            }
+
+            function isValidEmail(email) {
+                if (!email) return true;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            function isValidPhone(phone) {
+                if (!phone) return true;
+                const phoneRegex = /^[0-9+\-\s()]*$/;
+                return phoneRegex.test(phone);
+            }
+
+            function validateClientEmail() {
+                const email = clientEmailInput.value.trim();
+                if (email && !isValidEmail(email)) {
+                    clientEmailInput.classList.add('invalid');
+                    clientEmailValidation.style.display = 'block';
+                    return false;
+                } else {
+                    clientEmailInput.classList.remove('invalid');
+                    clientEmailValidation.style.display = 'none';
+                    return true;
+                }
+            }
+
+            function validateClientPhone() {
+                const phone = clientPhoneInput.value.trim();
+                if (phone && !isValidPhone(phone)) {
+                    clientPhoneInput.classList.add('invalid');
+                    clientPhoneValidation.style.display = 'block';
+                    return false;
+                } else {
+                    clientPhoneInput.classList.remove('invalid');
+                    clientPhoneValidation.style.display = 'none';
+                    return true;
+                }
+            }
+
+            // Add event listeners for real-time validation
+            clientEmailInput.addEventListener('input', validateClientEmail);
+            clientPhoneInput.addEventListener('input', validateClientPhone);
+
+            function getSavedQuotesFromStorage() {
+                const quotesString = localStorage.getItem('savedQuotes');
+                if (!quotesString) return [];
+                try {
+                    return JSON.parse(quotesString);
+                } catch (e) {
+                    console.error("Error parsing savedQuotes from localStorage:", e);
+                    showFeedback("שגיאה בטעינת הצעות שמורות. ייתכן ש חלק מהנתונים פגומים.", "error");
+                    return [];
+                }
+            }
+
+            function loadServiceConfiguration() {
+                const storedServiceItems = localStorage.getItem('serviceItemsConfiguration');
+                if (storedServiceItems) {
+                    try {
+                        serviceItems = JSON.parse(storedServiceItems);
+                        serviceItems.forEach(item => {
+                            if (item.selected === undefined) item.selected = false;
+                            if (item.quantity === undefined) item.quantity = 1;
+                        });
+                    } catch (e) {
+                        console.error("Error parsing serviceItems:", e);
+                        serviceItems = JSON.parse(JSON.stringify(defaultServiceItems));
+                        localStorage.removeItem('serviceItemsConfiguration');
+                    }
+                } else {
+                    serviceItems = JSON.parse(JSON.stringify(defaultServiceItems));
+                }
+
+                const storedAppSettings = localStorage.getItem('appSettings');
+                if (storedAppSettings) {
+                    try {
+                        const ps = JSON.parse(storedAppSettings);
+                        appSettings = {
+                            logoDataUrl: ps.logoDataUrl || '',
+                            businessName: ps.businessName || '',
+                            businessPhone: ps.businessPhone || '',
+                            businessEmail: ps.businessEmail || ''
+                        };
+                    } catch (e) {
+                        console.error("Error parsing appSettings:", e);
+                        appSettings = { logoDataUrl: '', businessName: '', businessPhone: '', businessEmail: '' };
+                        localStorage.removeItem('appSettings');
+                    }
+                } else {
+                    appSettings = { logoDataUrl: '', businessName: '', businessPhone: '', businessEmail: '' };
+                }
+                
+                businessNameInput.value = appSettings.businessName;
+                businessPhoneInput.value = appSettings.businessPhone;
+                businessEmailInput.value = appSettings.businessEmail;
+                
+                if (appSettings.logoDataUrl) {
+                    logoPreview.src = appSettings.logoDataUrl;
+                    logoPreview.style.display = 'block';
+                } else {
+                    logoPreview.src = '#';
+                    logoPreview.style.display = 'none';
+                }
+
+                const storedCalcSettings = localStorage.getItem('calculationSettings');
+                if (storedCalcSettings) {
+                    try {
+                        const parsedCalcSettings = JSON.parse(storedCalcSettings);
+                        calculationSettings.standardWorkHours = parsedCalcSettings.standardWorkHours !== undefined ? parsedCalcSettings.standardWorkHours : 8;
+                        calculationSettings.overtimeRate = parsedCalcSettings.overtimeRate !== undefined ? parsedCalcSettings.overtimeRate : 150;
+                    } catch (e) {
+                        console.error("Error parsing calculationSettings from localStorage:", e);
+                        calculationSettings = { standardWorkHours: 8, overtimeRate: 150 };
+                        localStorage.removeItem('calculationSettings');
+                    }
+                }
+            }
+
+            function saveServiceConfiguration() {
+                appSettings.businessName = businessNameInput.value.trim();
+                appSettings.businessPhone = businessPhoneInput.value.trim();
+                appSettings.businessEmail = businessEmailInput.value.trim();
+                
+                const itemsToStore = serviceItems.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    selected: false,
+                    quantity: 1
+                }));
+                
+                localStorage.setItem('serviceItemsConfiguration', JSON.stringify(itemsToStore));
+                localStorage.setItem('appSettings', JSON.stringify(appSettings));
+                localStorage.setItem('calculationSettings', JSON.stringify(calculationSettings));
+            }
+
+            function autoSaveData() {
+                if (clientNameInput.value.trim() || eventDateInput.value) {
+                    const quoteData = collectQuoteData();
+                    if (quoteData) {
+                        try {
+                            let savedQuotes = getSavedQuotesFromStorage();
+                            const existingIndex = savedQuotes.findIndex(q => q.id === quoteData.id);
+                            
+                            if (existingIndex > -1) {
+                                savedQuotes[existingIndex] = quoteData;
+                                localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                                console.log('Auto-saved (updated) data at', new Date().toLocaleTimeString());
+                            } else if (quoteData.id && !editingQuoteId) { 
+                                savedQuotes.push(quoteData);
+                                localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                                console.log('Auto-saved (new) data at', new Date().toLocaleTimeString());
+                            }
+                        } catch (e) {
+                            console.error("Auto-save error:", e);
+                        }
+                    }
+                }
+            }
+
+            function startAutoSave() {
+                if (autoSaveInterval) {
+                    clearInterval(autoSaveInterval);
+                }
+                autoSaveInterval = setInterval(autoSaveData, 120000); // Every 2 minutes
+            }
+
+            function collectQuoteData() {
+                const clientName = clientNameInput.value.trim();
+                const eventDate = eventDateInput.value;
+                
+                if (!clientName && !eventDate) return null; 
+                
+                const selectedServicesData = serviceItems
+                    .filter(item => item.selected)
+                    .map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        quantity: Math.max(1, item.quantity || 1)
+                    }));
+                
+                const baseServicesTotal = calculateCurrentServicesTotal();
+                
+                return {
+                    id: editingQuoteId || `temp_${Date.now().toString()}`, // Use a temp ID if not editing an existing one
+                    clientName,
+                    clientPhone: clientPhoneInput.value.trim(),
+                    clientEmail: clientEmailInput.value.trim(),
+                    eventDate,
+                    venueName: venueNameInput.value.trim(),
+                    amountPaid: parseFloat(amountPaidInput.value) || 0,
+                    selectedServices: selectedServicesData,
+                    baseServicesCost: baseServicesTotal,
+                    additionalEventCosts: currentlyLoadedQuoteData?.additionalEventCosts || 0,
+                    notes: quoteNotesEl.value.trim(),
+                    savedAt: new Date().toISOString(),
+                    wageDetails: currentlyLoadedQuoteData?.wageDetails || {} // Ensure wageDetails are preserved
+                };
+            }
+
+            function updateServiceQuantity(serviceId, change) {
+                const service = serviceItems.find(item => item.id === serviceId);
+                const quantityInputInDOM = document.querySelector(`.service-quantity[data-service-id="${serviceId}"]`);
+                
+                if (service && quantityInputInDOM) {
+                    let currentQuantity = parseInt(quantityInputInDOM.value) || 1;
+                    currentQuantity += change;
+                    if (currentQuantity < 1) currentQuantity = 1;
+                    
+                    service.quantity = currentQuantity;
+                    quantityInputInDOM.value = currentQuantity;
+                    
+                    if (service.selected) {
+                        updateSummaryDisplay();
+                    }
+                }
+            }
+
+            function renderServices() {
+                servicesContainer.innerHTML = '';
+                
+                serviceItems.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = `service-item ${item.selected ? 'selected' : ''}`;
+                    itemDiv.dataset.id = item.id;
+                    
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'item-name';
+                    nameSpan.textContent = item.name;
+                    
+                    const priceSpan = document.createElement('span');
+                    priceSpan.className = 'item-price';
+                    priceSpan.textContent = `${item.price} ₪`;
+                    
+                    const printDetailsDiv = document.createElement('div');
+                    printDetailsDiv.className = 'print-item-details';
+                    // Content for printDetailsDiv will be populated before printing if needed
+                    // Or better, generated during the print/export function itself
+                    itemDiv.appendChild(printDetailsDiv);
+
+                    const quantityControlDiv = document.createElement('div');
+                    quantityControlDiv.className = 'service-quantity-control';
+                    
+                    const minusBtn = document.createElement('button');
+                    minusBtn.type = 'button';
+                    minusBtn.className = 'quantity-btn minus-btn';
+                    minusBtn.textContent = '-';
+                    minusBtn.disabled = !item.selected;
+                    minusBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        updateServiceQuantity(item.id, -1);
+                    });
+                    
+                    const quantityInput = document.createElement('input');
+                    quantityInput.type = 'number';
+                    quantityInput.className = 'service-quantity';
+                    quantityInput.value = item.quantity || 1;
+                    quantityInput.min = '1';
+                    quantityInput.disabled = !item.selected;
+                    quantityInput.dataset.serviceId = item.id;
+                    
+                    quantityInput.addEventListener('change', (e) => {
+                        const service = serviceItems.find(s => s.id === item.id);
+                        if (service) {
+                            const newQuantity = parseInt(e.target.value);
+                            service.quantity = Math.max(1, newQuantity);
+                            if (service.selected) updateSummaryDisplay();
+                        }
+                    });
+                    
+                    quantityInput.addEventListener('input', (e) => {
+                        const val = parseInt(e.target.value);
+                        if (val >= 1) {
+                            const service = serviceItems.find(s => s.id === item.id);
+                            if (service) service.quantity = val;
+                            if (service && service.selected) updateSummaryDisplay();
+                        } else if (e.target.value === "") {
+                            // Allow temporarily empty for typing, will be validated on blur or change
+                            const service = serviceItems.find(s => s.id === item.id);
+                            if (service) service.quantity = 1; // Default to 1 if cleared
+                        }
+                    });
+                    
+                    quantityInput.addEventListener('blur', (e) => {
+                        const val = parseInt(e.target.value);
+                        if (isNaN(val) || val < 1) {
+                            e.target.value = 1; // Correct invalid input
+                            const service = serviceItems.find(s => s.id === item.id);
+                            if (service) service.quantity = 1;
+                            if (service && service.selected) updateSummaryDisplay();
+                        }
+                    });
+                    
+                    quantityInput.addEventListener('click', (e) => e.stopPropagation()); // Prevent item click
+                    
+                    const plusBtn = document.createElement('button');
+                    plusBtn.type = 'button';
+                    plusBtn.className = 'quantity-btn plus-btn';
+                    plusBtn.textContent = '+';
+                    plusBtn.disabled = !item.selected;
+                    plusBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        updateServiceQuantity(item.id, 1);
+                    });
+                    
+                    quantityControlDiv.appendChild(minusBtn);
+                    quantityControlDiv.appendChild(quantityInput);
+                    quantityControlDiv.appendChild(plusBtn);
+                    
+                    itemDiv.appendChild(nameSpan);
+                    itemDiv.appendChild(priceSpan);
+                    itemDiv.appendChild(quantityControlDiv);
+                    
+                    itemDiv.addEventListener('click', () => toggleService(item.id));
+                    servicesContainer.appendChild(itemDiv);
+                });
+                
+                updateSummaryDisplay();
+            }
+
+            function toggleService(id) {
+                const service = serviceItems.find(item => item.id === id);
+                if (service) {
+                    service.selected = !service.selected;
+                    if (service.selected) {
+                        service.quantity = Math.max(1, service.quantity || 1); // Ensure quantity is at least 1 when selected
+                    }
+                    // No need to reset quantity if deselected, it will be ignored in calculations
+                }
+                renderServices(); // This will re-render and updateSummaryDisplay will be called
+            }
+
+            function calculateCurrentServicesTotal() {
+                return serviceItems
+                    .filter(i => i.selected)
+                    .reduce((sum, i) => sum + (i.price * Math.max(1, i.quantity || 1)), 0);
+            }
+
+            function updateSummaryDisplay() {
+                const baseServicesCost = calculateCurrentServicesTotal();
+                baseServicesCostEl.textContent = baseServicesCost.toFixed(2);
+
+                let additionalEventCosts = 0;
+                let mainPaid = 0; // סכום ששולם כללי באירוע
+                let groomPaid = 0; // תשלום צד חתן
+                let bridePaid = 0; // תשלום צד כלה
+                let eventStartTime = ''; // שעת התחלה לאירוע
+                let eventEndTime = '';   // שעת סיום לאירוע
+
+
+                if (currentlyLoadedQuoteData && editingQuoteId && currentlyLoadedQuoteData.additionalEventCosts) {
+                    additionalEventCosts = parseFloat(currentlyLoadedQuoteData.additionalEventCosts) || 0;
+                }
+                // טעינת תשלום צד חתן וכלה לסיכום הראשי
+                if (currentlyLoadedQuoteData && editingQuoteId && currentlyLoadedQuoteData.wageDetails) {
+                    mainPaid = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentMain || 0);
+                    groomPaid = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentGroomSide || 0);
+                    bridePaid = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentBrideSide || 0);
+                    eventStartTime = currentlyLoadedQuoteData.wageDetails.startTime || ''; // טעינת שעת התחלה
+                    eventEndTime = currentlyLoadedQuoteData.wageDetails.endTime || '';     // טעינת שעת סיום
+                }
+
+                additionalEventCostsDisplayEl.textContent = additionalEventCosts.toFixed(2);
+                additionalEventCostsContainerEl.style.display = additionalEventCosts > 0 ? 'flex' : 'none';
+
+                // הצגת שעות התחלה וסיום
+                if (eventStartTime && eventEndTime) {
+                    eventStartTimeDisplay.textContent = eventStartTime;
+                    eventEndTimeDisplay.textContent = eventEndTime;
+                    eventTimesDisplayContainer.style.display = 'block'; // הצג את הקונטיינר
+                } else {
+                    eventStartTimeDisplay.textContent = '';
+                    eventEndTimeDisplay.textContent = '';
+                    eventTimesDisplayContainer.style.display = 'none'; // הסתר אם אין נתונים
+                }
+
+                const finalTotal = baseServicesCost + additionalEventCosts;
+                finalTotalCostEl.textContent = finalTotal.toFixed(2);
+                
+                const advancePaid = parseFloat(amountPaidInput.value) || 0;
+                // סכום ששולם באירוע = סכום ראשי + צד חתן + צד כלה
+                const eventDayPaidVal = mainPaid + groomPaid + bridePaid; 
+                
+                eventDayPaymentDisplay.textContent = eventDayPaidVal.toFixed(2);
+                eventDayPaymentDisplayContainer.style.display = eventDayPaidVal > 0 ? 'flex' : 'none';
+                
+                const totalAmountPaid = advancePaid + eventDayPaidVal;
+                totalPaidDisplay.textContent = totalAmountPaid.toFixed(2);
+                
+                const balance = finalTotal - totalAmountPaid;
+                balanceDueEl.textContent = balance.toFixed(2);
+
+                // עדכון שדות תשלום מפורטים בסיכום הראשי
+                if (mainEventPaymentSummary) mainEventPaymentSummary.textContent = mainPaid.toFixed(2);
+                if (groomSidePaymentSummary) groomSidePaymentSummary.textContent = groomPaid.toFixed(2);
+                if (brideSidePaymentSummary) brideSidePaymentSummary.textContent = bridePaid.toFixed(2);
+            }
+
+            amountPaidInput.addEventListener('input', updateSummaryDisplay);
+
+            function populatePriceSettingsInModal() {
+                priceSettingsContainer.innerHTML = '<h4>הגדרת מחירי שירותים</h4>'; // Clear previous items but keep title
+                
+                serviceItems.forEach(item => {
+                    const settingItemDiv = document.createElement('div');
+                    settingItemDiv.className = 'price-setting-item';
+                    
+                    const nameLabel = document.createElement('label');
+                    nameLabel.htmlFor = `price-input-${item.id}`;
+                    nameLabel.textContent = `${item.name}:`;
+                    
+                    const priceInput = document.createElement('input');
+                    priceInput.type = 'number';
+                    priceInput.id = `price-input-${item.id}`;
+                    priceInput.value = item.price;
+                    priceInput.min = "0";
+                    priceInput.dataset.serviceId = item.id;
+                    
+                    priceInput.addEventListener('change', (e) => {
+                        const service = serviceItems.find(s => s.id === e.target.dataset.serviceId);
+                        if (service) {
+                            const newPrice = parseFloat(e.target.value);
+                            if (!isNaN(newPrice) && newPrice >= 0) {
+                                service.price = newPrice;
+                            } else {
+                                e.target.value = service.price; // Revert if invalid
+                            }
+                        }
+                    });
+                    
+                    const deleteServiceBtn = document.createElement('button');
+                    deleteServiceBtn.textContent = 'מחק שירות';
+                    deleteServiceBtn.className = 'btn btn-danger btn-sm';
+                    deleteServiceBtn.dataset.serviceIdToDelete = item.id;
+                    deleteServiceBtn.addEventListener('click', handleDeleteServiceFromSettings);
+                    
+                    settingItemDiv.appendChild(nameLabel);
+                    settingItemDiv.appendChild(priceInput);
+                    settingItemDiv.appendChild(deleteServiceBtn);
+                    priceSettingsContainer.appendChild(settingItemDiv);
+                });
+            }
+
+            function handleDeleteServiceFromSettings(event) {
+                const serviceIdToDelete = event.target.dataset.serviceIdToDelete;
+                const serviceToDelete = serviceItems.find(s => s.id === serviceIdToDelete);
+                
+                if (serviceToDelete) {
+                    if (confirm(`האם אתה בטוח שברצונך למחוק את השירות "${serviceToDelete.name}"? פעולה זו היא סופית לאחר שמירת ההגדרות.`)) {
+                        const itemDivInModal = event.target.closest('.price-setting-item');
+                        if (itemDivInModal) itemDivInModal.remove(); // Remove from modal UI immediately
+                        
+                        // Mark for deletion, actual deletion happens on saveSettingsBtn click
+                        // Or, directly modify serviceItems array here and re-render if save is implied
+                        // For simplicity here, modifying the array directly
+                        serviceItems = serviceItems.filter(s => s.id !== serviceIdToDelete);
+                        // No need to populatePriceSettingsInModal() again as the item is removed visually.
+                        // Save button will persist this change.
+                        showFeedback(`השירות "${serviceToDelete.name}" יוסר לאחר שמירת ההגדרות. לחץ "שמור את כל ההגדרות" לאישור.`, 'info', 5000);
+                    }
+                }
+            }
+
+            addNewServiceBtn.addEventListener('click', () => {
+                const name = newServiceNameInput.value.trim();
+                const priceStr = newServicePriceInput.value.trim();
+                
+                if (!name) {
+                    showFeedback('יש להזין שם לשירות החדש.', 'error');
+                    newServiceNameInput.focus();
+                    return;
+                }
+                
+                if (!priceStr) {
+                    showFeedback('יש להזין מחיר לשירות החדש.', 'error');
+                    newServicePriceInput.focus();
+                    return;
+                }
+                
+                const price = parseFloat(priceStr);
+                if (isNaN(price) || price < 0) {
+                    showFeedback('מחיר השירות אינו תקין.', 'error');
+                    newServicePriceInput.focus();
+                    return;
+                }
+                
+                if (serviceItems.some(item => item.name.toLowerCase() === name.toLowerCase())) {
+                    showFeedback(`שירות בשם "${name}" כבר קיים.`, 'error');
+                    newServiceNameInput.focus();
+                    return;
+                }
+                
+                const newService = {
+                    id: 'service_' + Date.now(), // Unique ID
+                    name: name,
+                    price: price,
+                    selected: false, // Default state for a new service
+                    quantity: 1    // Default quantity
+                };
+                
+                serviceItems.push(newService);
+                populatePriceSettingsInModal(); // Re-render the settings list with the new service
+                newServiceNameInput.value = '';
+                newServicePriceInput.value = '';
+                showFeedback(`שירות "${name}" נוסף לרשימת ההגדרות. לחץ "שמור את כל ההגדרות" לאישור.`, 'success');
+            });
+            
+            saveSettingsBtn.addEventListener('click', () => {
+                saveServiceConfiguration(); // This saves the current state of serviceItems (incl. new/deleted) and appSettings
+                showFeedback('ההגדרות נשמרו בהצלחה!', 'success');
+                renderServices(); // Re-render main services list if prices/services changed
+                closeModal(settingsModal);
+            });
+
+            logoFileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    if (file.size > 1024 * 1024) { // 1MB limit
+                        showFeedback('הקובץ גדול מדי (מקסימום 1MB).', 'error');
+                        logoFileInput.value = ''; // Reset file input
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        logoPreview.src = e.target.result;
+                        logoPreview.style.display = 'block';
+                        appSettings.logoDataUrl = e.target.result; // Update appSettings
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            removeLogoBtn.addEventListener('click', () => {
+                appSettings.logoDataUrl = '';
+                logoPreview.src = '#';
+                logoPreview.style.display = 'none';
+                logoFileInput.value = ''; // Reset file input
+                showFeedback('הלוגו הוסר. לחץ "שמור הגדרות" כדי להחיל.', 'info');
+            });
+
+            function openModal(modalElement) {
+                if (modalElement === settingsModal) {
+                    // Populate settings modal with current appSettings and serviceItems
+                    businessNameInput.value = appSettings.businessName;
+                    businessPhoneInput.value = appSettings.businessPhone;
+                    businessEmailInput.value = appSettings.businessEmail;
+                    
+                    if (appSettings.logoDataUrl) {
+                        logoPreview.src = appSettings.logoDataUrl;
+                        logoPreview.style.display = 'block';
+                    } else {
+                        logoPreview.src = '#';
+                        logoPreview.style.display = 'none';
+                    }
+                    
+                    populatePriceSettingsInModal(); // Ensure service prices are current
+                }
+                // Add similar logic for other modals if they need pre-population
+                
+                modalElement.style.display = "block";
+                bodyEl.classList.add('modal-open');
+            }
+
+            function closeModal(modalElement) {
+                modalElement.style.display = "none";
+                bodyEl.classList.remove('modal-open');
+            }
+
+            closeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const modal = e.target.closest('.modal');
+                    if (modal) closeModal(modal);
+                });
+            });
+
+            function resetQuoteForm() {
+                clientNameInput.value = '';
+                clientPhoneInput.value = '';
+                clientEmailInput.value = '';
+                eventDateInput.value = '';
+                venueNameInput.value = '';
+                quoteNotesEl.value = '';
+                amountPaidInput.value = '0';
+                
+                // Reset serviceItems to their configured defaults (prices from localStorage, selection/quantity reset)
+                const baseServiceConfig = JSON.parse(localStorage.getItem('serviceItemsConfiguration') || JSON.stringify(defaultServiceItems));
+                serviceItems = baseServiceConfig.map(confItem => {
+                    // Find the corresponding item in the live serviceItems to retain its current price if it was updated in settings modal but not saved yet
+                    // Or rather, always use the price from the loaded configuration
+                    return {
+                        ...confItem, // id, name, price from stored config
+                        selected: false,
+                        quantity: 1
+                    };
+                });
+                
+                editingQuoteId = null;
+                currentlyLoadedQuoteData = null; // Clear any loaded quote data
+                saveQuoteBtn.textContent = 'שמור פרטי הצעה';
+                renderServices(); // This calls updateSummaryDisplay
+            }
+
+            function renderSavedQuotesList(filterText = '') {
+                savedQuotesListContainer.innerHTML = '';
+                let savedQuotes = getSavedQuotesFromStorage();
+                
+                if (filterText) {
+                    const lowerFilterText = filterText.toLowerCase();
+                    savedQuotes = savedQuotes.filter(quote =>
+                        (quote.clientName && quote.clientName.toLowerCase().includes(lowerFilterText)) ||
+                        (quote.clientEmail && quote.clientEmail.toLowerCase().includes(lowerFilterText)) ||
+                        (quote.venueName && quote.venueName.toLowerCase().includes(lowerFilterText)) ||
+                        (quote.notes && quote.notes.toLowerCase().includes(lowerFilterText)) ||
+                        (quote.eventDate && quote.eventDate.includes(lowerFilterText))
+                    );
+                }
+                
+                if (savedQuotes.length === 0) {
+                    const noQuotesMessage = document.createElement('div');
+                    noQuotesMessage.className = 'no-saved-quotes-message';
+                    noQuotesMessage.textContent = filterText ? 'לא נמצאו הצעות תואמות לחיפוש.' : 'לא נמצאו הצעות שמורות.';
+                    savedQuotesListContainer.appendChild(noQuotesMessage);
+                    return;
+                }
+                
+                savedQuotes.sort((a, b) => new Date(b.savedAt) - new Date(a.savedAt)); // Show newest first
+                
+                savedQuotes.forEach(quote => {
+                    const listItem = document.createElement('div');
+                    listItem.className = 'quote-list-item';
+                    
+                    const infoSpan = document.createElement('span');
+                    infoSpan.className = 'quote-list-item-info';
+                    infoSpan.dataset.quoteId = quote.id;
+                    infoSpan.addEventListener('click', () => loadQuoteForEditing(quote.id));
+                    
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'quote-list-item-name';
+                    nameSpan.textContent = quote.clientName || 'לקוח לא ידוע';
+                    
+                    const dateSpan = document.createElement('span');
+                    dateSpan.className = 'quote-list-item-date';
+                    try {
+                        dateSpan.textContent = quote.eventDate ? new Date(quote.eventDate + 'T00:00:00').toLocaleDateString('he-IL') : '-';
+                    } catch (e) {
+                        dateSpan.textContent = quote.eventDate || '-'; // Fallback for invalid date format
+                    }
+                    
+                    infoSpan.appendChild(nameSpan);
+                    infoSpan.appendChild(dateSpan);
+                    
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'quote-list-item-actions';
+                    
+                    const wageCalcBtn = document.createElement('button');
+                    wageCalcBtn.textContent = 'שכר ואישור';
+                    wageCalcBtn.title = 'חישוב שכר, תשלום וחתימה באירוע';
+                    wageCalcBtn.className = 'btn btn-info btn-wage';
+                    wageCalcBtn.dataset.quoteId = quote.id;
+                    wageCalcBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering loadQuoteForEditing
+                        openEventWageModal(quote.id, quote.clientName);
+                    });
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'מחק';
+                    deleteBtn.title = 'מחק הצעה';
+                    deleteBtn.className = 'btn btn-danger';
+                    deleteBtn.dataset.quoteId = quote.id;
+                    deleteBtn.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering loadQuoteForEditing
+                        deleteQuote(quote.id);
+                    });
+                    
+                    actionsDiv.appendChild(wageCalcBtn);
+                    actionsDiv.appendChild(deleteBtn);
+                    
+                    listItem.appendChild(infoSpan);
+                    listItem.appendChild(actionsDiv);
+                    
+                    savedQuotesListContainer.appendChild(listItem);
+                });
+            }
+
+            function loadQuoteForEditing(quoteId) {
+                const savedQuotes = getSavedQuotesFromStorage();
+                const quoteToEdit = savedQuotes.find(q => q.id == quoteId); // Use == for type coercion if IDs might be numbers/strings
+                
+                if (!quoteToEdit) {
+                    showFeedback('הצעה לא נמצאה.', 'error');
+                    console.error(`Quote not found for ID: ${quoteId}`);
+                    return;
+                }
+                
+                // Deep copy the quote to avoid modifying the stored version directly until save
+                currentlyLoadedQuoteData = JSON.parse(JSON.stringify(quoteToEdit)); 
+                
+                clientNameInput.value = currentlyLoadedQuoteData.clientName || '';
+                clientPhoneInput.value = currentlyLoadedQuoteData.clientPhone || '';
+                clientEmailInput.value = currentlyLoadedQuoteData.clientEmail || '';
+                eventDateInput.value = currentlyLoadedQuoteData.eventDate || '';
+                venueNameInput.value = currentlyLoadedQuoteData.venueName || '';
+                amountPaidInput.value = currentlyLoadedQuoteData.amountPaid || 0;
+                quoteNotesEl.value = currentlyLoadedQuoteData.notes || '';
+                
+                // Update serviceItems based on the loaded quote and current service configuration
+                const currentConfiguredServices = JSON.parse(localStorage.getItem('serviceItemsConfiguration') || JSON.stringify(defaultServiceItems));
+                
+                serviceItems = currentConfiguredServices.map(confItem => {
+                    const savedService = currentlyLoadedQuoteData.selectedServices ? 
+                                       currentlyLoadedQuoteData.selectedServices.find(s => s.id === confItem.id || s.name === confItem.name) // Match by ID first, then by name as fallback
+                                       : null;
+                    return {
+                        ...confItem, // Start with configured id, name, price
+                        price: savedService ? savedService.price : confItem.price, // Use saved price if available, else configured
+                        quantity: savedService ? (savedService.quantity || 1) : 1,
+                        selected: !!savedService // True if service was found in saved quote's selected services
+                    };
+                });
+
+                let missingServicesMessages = [];
+                // Check if any services from the loaded quote are no longer in the current configuration
+                if (currentlyLoadedQuoteData.selectedServices && Array.isArray(currentlyLoadedQuoteData.selectedServices)) {
+                    currentlyLoadedQuoteData.selectedServices.forEach(savedService => {
+                        const serviceInCurrentConfig = serviceItems.find(item => item.id === savedService.id || item.name === savedService.name);
+                        if (!serviceInCurrentConfig) {
+                            // This logic is slightly off because serviceItems is already rebuilt.
+                            // Better to check against currentConfiguredServices directly.
+                            if (!currentConfiguredServices.find(item => item.id === savedService.id || item.name === savedService.name)) {
+                                console.warn(`Service "${savedService.name}" from quote not found in current service list.`);
+                                missingServicesMessages.push(savedService.name);
+                            }
+                        }
+                    });
+                }
+
+
+                editingQuoteId = quoteId; // Set the ID of the quote being edited
+                saveQuoteBtn.textContent = 'עדכן הצעה שמורה';
+                renderServices(); // This calls updateSummaryDisplay which will use currentlyLoadedQuoteData
+                window.scrollTo(0, 0); // Scroll to top
+                
+                let feedbackMsg = `הצעת מחיר עבור '${currentlyLoadedQuoteData.clientName || 'לקוח'}' נטענה לעריכה.`;
+                if (missingServicesMessages.length > 0) {
+                    feedbackMsg += ` שים לב: השירותים הבאים מההצעה המקורית אינם זמינים עוד במערכת: ${missingServicesMessages.join(', ')}. הם לא יופיעו בהצעה זו אלא אם תוסיף אותם מחדש דרך ההגדרות.`;
+                }
+                
+                showFeedback(
+                    feedbackMsg,
+                    missingServicesMessages.length > 0 ? 'warning' : 'success',
+                    missingServicesMessages.length > 0 ? 7000 : 3500
+                );
+            }
+
+            function deleteQuote(quoteId) {
+                if (!confirm(`האם אתה בטוח שברצונך למחוק הצעה זו? לא ניתן לשחזר פעולה זו.`)) {
+                    return;
+                }
+                
+                try {
+                    let savedQuotes = getSavedQuotesFromStorage();
+                    const initialLength = savedQuotes.length;
+                    savedQuotes = savedQuotes.filter(quote => quote.id != quoteId); // Use != for type coercion
+                    
+                    if (savedQuotes.length < initialLength) {
+                        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                        showFeedback('ההצעה נמחקה בהצלחה!', 'success');
+                        renderSavedQuotesList(searchSavedQuotesInput.value); // Refresh the list
+                        
+                        if (editingQuoteId == quoteId) { // If the deleted quote was being edited
+                            resetQuoteForm();
+                        }
+                    } else {
+                        showFeedback('שגיאה: ההצעה למחיקה לא נמצאה.', 'error');
+                    }
+                } catch (e) {
+                    console.error("Error deleting quote:", e);
+                    showFeedback('שגיאה במחיקת ההצעה.', 'error');
+                }
+            }
+            
+            settingsBtn.addEventListener('click', () => openModal(settingsModal));
+            searchSavedQuotesInput.addEventListener('input', (e) => renderSavedQuotesList(e.target.value));
+
+            saveQuoteBtn.addEventListener('click', async () => { // הוספתי async כדי לאפשר שימוש ב-await
+                const clientName = clientNameInput.value.trim();
+                const eventDate = eventDateInput.value; // זהו התאריך שבו בודקים התנגשות
+                const clientEmail = clientEmailInput.value.trim();
+                const clientPhone = clientPhoneInput.value.trim();
+                
+                if (!clientName || !eventDate) {
+                    showFeedback('יש למלא שם לקוח ותאריך אירוע.', 'error');
+                    return;
+                }
+                
+                if (!validateClientEmail() || !validateClientPhone()) {
+                    showFeedback('יש לתקן את השדות המסומנים באדום לפני השמירה.', 'error');
+                    return;
+                }
+
+                // --- בדיקת התנגשות תאריכים ---
+                const savedQuotes = getSavedQuotesFromStorage();
+                const existingQuoteForDate = savedQuotes.find(q => 
+                    q.eventDate === eventDate && q.id !== editingQuoteId // התנגשות בתאריך לאותו אירוע (לא כולל את האירוע הנוכחי אם עורכים אותו)
+                );
+
+                if (existingQuoteForDate) {
+                    const confirmSave = confirm(`קיים כבר אירוע בתאריך זה (${eventDate}) עבור ${existingQuoteForDate.clientName || 'לקוח אחר'}. האם ברצונך לשמור בכל זאת?`);
+                    if (!confirmSave) {
+                        showFeedback('שמירת ההצעה בוטלה.', 'warning');
+                        return; // ביטול השמירה
+                    }
+                }
+                // --- סוף בדיקת התנגשות תאריכים ---
+
+
+                const selectedServicesData = serviceItems
+                    .filter(item => item.selected)
+                    .map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        quantity: Math.max(1, item.quantity || 1)
+                    }));
+                
+                const baseServicesTotal = calculateCurrentServicesTotal();
+                
+                // Preserve existing wageDetails, eventPaymentAmount, additionalEventCosts if editing
+                let existingWageDetails = {};
+                let existingEventPaymentTotal = 0; // Total event payment, sums main + groom + bride
+                let existingAdditionalCosts = 0;
+                
+                if (editingQuoteId && currentlyLoadedQuoteData) {
+                    existingWageDetails = currentlyLoadedQuoteData.wageDetails || {};
+                    // Calculate total event payment from its components stored in wageDetails
+                    existingEventPaymentTotal = parseFloat(existingWageDetails.paymentMain || 0) +
+                                                parseFloat(existingWageDetails.paymentGroomSide || 0) +
+                                                parseFloat(existingWageDetails.paymentBrideSide || 0);
+                    existingAdditionalCosts = currentlyLoadedQuoteData.additionalEventCosts || 0;
+                } else if (editingQuoteId) { // Fallback if currentlyLoadedQuoteData is somehow not set but ID exists
+                    const savedQuotesTemp = getSavedQuotesFromStorage();
+                    const existingQuoteFromStorage = savedQuotesTemp.find(q => q.id == editingQuoteId);
+                    if (existingQuoteFromStorage) {
+                        existingWageDetails = existingQuoteFromStorage.wageDetails || {};
+                        // Calculate total event payment from its components loaded from storage
+                        existingEventPaymentTotal = parseFloat(existingWageDetails.paymentMain || 0) +
+                                                    parseFloat(existingWageDetails.paymentGroomSide || 0) +
+                                                    parseFloat(existingWageDetails.paymentBrideSide || 0);
+                        existingAdditionalCosts = existingQuoteFromStorage.additionalEventCosts || 0;
+                    }
+                }
+
+                const quoteDetails = {
+                    id: editingQuoteId || Date.now().toString(), // Use existing ID or generate new
+                    clientName,
+                    clientPhone,
+                    clientEmail,
+                    eventDate,
+                    venueName: venueNameInput.value.trim(),
+                    amountPaid: parseFloat(amountPaidInput.value) || 0,
+                    eventPaymentAmount: existingEventPaymentTotal, // Store the calculated total event payment
+                    selectedServices: selectedServicesData,
+                    baseServicesCost: baseServicesTotal,
+                    additionalEventCosts: existingAdditionalCosts, // Preserved from loaded data or wage modal
+                    notes: quoteNotesEl.value.trim(),
+                    savedAt: new Date().toISOString(),
+                    wageDetails: existingWageDetails // Preserved detailed wage/payment info
+                };
+
+                try {
+                    // let savedQuotes = getSavedQuotesFromStorage(); // כבר נטען למעלה לבדיקת התנגשות
+                    
+                    if (editingQuoteId) { // Update existing quote
+                        const quoteIndex = savedQuotes.findIndex(q => q.id == editingQuoteId);
+                        if (quoteIndex > -1) {
+                            savedQuotes[quoteIndex] = quoteDetails;
+                            currentlyLoadedQuoteData = JSON.parse(JSON.stringify(quoteDetails)); // Update loaded data
+                        } else { // Should not happen if editingQuoteId is correctly set
+                            savedQuotes.push(quoteDetails); // Add as new if somehow index not found
+                        }
+                        showFeedback(`ההצעה עבור '${clientName}' עודכנה!`, 'success');
+                    } else { // Save new quote
+                        savedQuotes.push(quoteDetails);
+                        showFeedback(`ההצעה עבור '${clientName}' נשמרה!`, 'success');
+                    }
+                    
+                    localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                    
+                    if (!editingQuoteId) { // If it was a new quote, reset form
+                        resetQuoteForm();
+                    } else {
+                        updateSummaryDisplay(); // If editing, just update summary
+                    }
+                    
+                    renderSavedQuotesList(searchSavedQuotesInput.value); // Refresh the list
+                } catch (e) {
+                    console.error("Error saving quote:", e);
+                    showFeedback('שגיאה בשמירת ההצעה.', 'error');
+                }
+            });
+
+            if (exportToHtmlBtn) {
+                exportToHtmlBtn.addEventListener('click', () => {
+                    const clientName = clientNameInput.value.trim();
+                    if (!clientName) {
+                        showFeedback('יש למלא שם לקוח לפני ייצוא ההצעה.', 'error');
+                        return;
+                    }
+
+                    showFeedback('מכין קובץ HTML לייצוא...', 'info', 2000);
+                    updateSummaryDisplay(); // Ensure summary is up-to-date before export
+
+                    const getValue = (element, placeholder = 'לא צוין') => (element && element.value) ? element.value.trim() : placeholder;
+                    const getNumericValue = (element, defaultValue = 0) => (element && element.value) ? parseFloat(element.value) : defaultValue;
+                    const getTextContent = (element, placeholder = '0') => (element && element.textContent) ? element.textContent.trim() : placeholder;
+
+                    function formatDateForDisplay(dateString) {
+                        if (!dateString) return 'לא צוין';
+                        try {
+                            return new Date(dateString + 'T00:00:00').toLocaleDateString('he-IL', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+                        } catch (e) {
+                            return dateString; // Fallback if date is invalid
+                        }
+                    }
+                    
+                    const clientNameValue = getValue(clientNameInput, 'לקוח');
+                    const clientPhone = getValue(clientPhoneInput);
+                    const clientEmail = getValue(clientEmailInput);
+                    const eventDate = formatDateForDisplay(getValue(eventDateInput, null));
+                    const venueName = getValue(venueNameInput);
+                    const quoteNotes = getValue(quoteNotesEl, ''); // Keep empty if no notes
+
+                    const advancePaid = getNumericValue(amountPaidInput, 0);
+                    // הוסתרו מהייצוא: const baseServicesCost = parseFloat(getTextContent(baseServicesCostEl, '0'));
+                    
+                    // Use currentlyLoadedQuoteData for additional costs and detailed event day payment if available
+                    let additionalCosts = 0;
+                    let mainPaidForExport = 0;
+                    let groomPaidForExport = 0;
+                    let bridePaidForExport = 0;
+                    let exportStartTime = '';
+                    let exportEndTime = '';
+
+                    if (currentlyLoadedQuoteData && currentlyLoadedQuoteData.additionalEventCosts) {
+                        additionalCosts = parseFloat(currentlyLoadedQuoteData.additionalEventCosts) || 0;
+                    } else if (editingQuoteId) { // Fallback for older quotes without these fields in currentlyLoadedQuoteData
+                        const tempQuote = getSavedQuotesFromStorage().find(q=>q.id == editingQuoteId);
+                        additionalCosts = tempQuote ? (parseFloat(tempQuote.additionalEventCosts) || 0) : 0;
+                    }
+
+                    // Get detailed payment split for export
+                    if (currentlyLoadedQuoteData && currentlyLoadedQuoteData.wageDetails) {
+                        mainPaidForExport = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentMain || 0);
+                        groomPaidForExport = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentGroomSide || 0);
+                        bridePaidForExport = parseFloat(currentlyLoadedQuoteData.wageDetails.paymentBrideSide || 0);
+                        exportStartTime = currentlyLoadedQuoteData.wageDetails.startTime || '';
+                        exportEndTime = currentlyLoadedQuoteData.wageDetails.endTime || '';
+                    }
+                    
+                    // הוסתר מהייצוא: const finalTotalCost = parseFloat(getTextContent(finalTotalCostEl, '0')); 
+                    
+                    // The total event day payment from all sources (main + groom + bride)
+                    const eventDayPaymentTotalForExport = mainPaidForExport + groomPaidForExport + bridePaidForExport;
+                    
+                    const totalPaid = parseFloat(getTextContent(totalPaidDisplay, '0')); // Correct from updateSummaryDisplay
+                    const balanceDue = parseFloat(getTextContent(balanceDueEl, '0')); // Correct from updateSummaryDisplay
+
+                    let servicesTableRows = '';
+                    const selectedServices = serviceItems.filter(item => item.selected);
+                    
+                    if (selectedServices.length > 0) {
+                        selectedServices.forEach(service => {
+                            servicesTableRows += `
+                                <tr>
+                                    <td>${service.name}</td>
+                                    <td class="number-cell">${service.quantity || 1}</td>
+                                    <td class="number-cell">${service.price.toFixed(2)} ₪</td>
+                                    <td class="number-cell">${(service.price * (service.quantity || 1)).toFixed(2)} ₪</td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        servicesTableRows = '<tr><td colspan="4" style="text-align:center; padding:10px;">לא נבחרו שירותים.</td></tr>';
+                    }
+                    
+                    const logoImgTag = appSettings.logoDataUrl ? `<img src="${appSettings.logoDataUrl}" alt="לוגו העסק" class="logo">` : '';
+
+                    const htmlContent = `
+                        <!DOCTYPE html>
+                        <html lang="he" dir="rtl">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>הצעת מחיר - ${clientNameValue}</title>
+                            <style>
+                                body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #f4f4f4; color: #333; direction: rtl; }
+                                .page-container { max-width: 800px; margin: 20px auto; background-color: #fff; padding: 25px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px; }
+                                .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 25px; }
+                                .header img.logo { max-width: 180px; max-height: 90px; object-fit: contain; margin-left: 20px; }
+                                .business-info { text-align: right; font-size: 0.95em; }
+                                .business-info p { margin: 4px 0; }
+                                .business-info strong { font-weight: bold; }
+                                h1.quote-title { text-align: center; font-size: 2em; margin-bottom: 30px; color: #2c3e50; }
+                                h2.section-title { font-size: 1.5em; border-bottom: 1px solid #ccc; padding-bottom: 6px; margin-top: 30px; margin-bottom: 15px; color: #34495e; }
+                                .details-section p { margin-bottom: 10px; font-size: 1em; line-height: 1.5; }
+                                .details-section p strong { font-weight: bold; color: #555; }
+                                table.services-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 0.95em; }
+                                table.services-table th, table.services-table td { border: 1px solid #ddd; padding: 10px; text-align: right; }
+                                table.services-table th { background-color: #e9ecef; font-weight: bold; color: #495057; }
+                                table.services-table td.number-cell { text-align: center; }
+                                .summary-section { padding-top: 20px; border-top: 1px solid #eee; margin-top: 30px; }
+                                .summary-section p { display: flex; justify-content: space-between; font-size: 1.05em; margin-bottom: 8px; padding: 4px 0; }
+                                .summary-section p strong { font-weight: bold; }
+                                .summary-section p span { font-weight: bold; }
+                                .summary-section p.total { font-size: 1.2em; color: #28a745; }
+                                .summary-section p.balance-due { font-size: 1.2em; color: #dc3545; }
+                                .summary-section .summary-detail-item {
+                                    font-size: 0.95em; /* Slightly smaller for sub-items in print */
+                                    padding-right: 20px; /* Indent sub-items in print */
+                                    color: #555;
+                                }
+                                .notes-section { margin-top: 30px; }
+                                .notes-section pre { white-space: pre-wrap; word-wrap: break-word; border: 1px solid #eee; padding: 12px; min-height: 60px; background-color: #fdfdfd; font-size: 0.95em; border-radius: 4px; }
+                                .notes-section pre:empty::before { content: "אין הערות."; color: #777; font-style: italic; }
+                                .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; font-size: 0.85em; text-align: center; color: #777; }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="page-container">
+                                <div class="header">
+                                    ${logoImgTag}
+                                    <div class="business-info">
+                                        <p><strong>${appSettings.businessName || 'שם העסק לא הוגדר'}</strong></p>
+                                        ${appSettings.businessPhone ? `<p><strong>טלפון: ${appSettings.businessPhone}</strong></p>` : ''}
+                                        ${appSettings.businessEmail ? `<p><strong>אימייל: ${appSettings.businessEmail}</strong></p>` : ''}
+                                    </div>
+                                </div>
+
+                                <h1 class="quote-title">הצעת מחיר</h1>
+
+                                <div class="details-section">
+                                    <h2 class="section-title">פרטי לקוח ואירוע</h2>
+                                    <p><strong>שם הלקוח:</strong> ${clientNameValue}</p>
+                                    <p><strong>טלפון:</strong> ${clientPhone}</p>
+                                    <p><strong>אימייל:</strong> ${clientEmail}</p>
+                                    <p><strong>תאריך האירוע:</strong> ${eventDate}</p>
+                                    <p><strong>מקום:</strong> ${venueName}</p>
+                                </div>
+
+                                <div class="services-section">
+                                    <h2 class="section-title">שירותים נבחרים</h2>
+                                    <table class="services-table">
+                                        <thead>
+                                            <tr>
+                                                <th>שירות</th>
+                                                <th class="number-cell">כמות</th>
+                                                <th class="number-cell">מחיר ליחידה (₪)</th>
+                                                <th class="number-cell">סה"כ (₪)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${servicesTableRows}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="summary-section">
+                                    <h2 class="section-title">סיכום</h2>
+                                    ${additionalCosts > 0 ? `<p><strong>עלויות נוספות (שעות/הוצאות):</strong> <span>${additionalCosts.toFixed(2)} ₪</span></p>` : ''}
+                                    ${exportStartTime && exportEndTime ? `<p class="summary-detail-item"><strong>שעת התחלה באירוע:</strong> <span>${exportStartTime}</span></p>` : ''}
+                                    ${exportStartTime && exportEndTime ? `<p class="summary-detail-item"><strong>שעת סיום באירוע:</strong> <span>${exportEndTime}</span></p>` : ''}
+                                    <hr style="margin: 15px 0;">
+                                    <p><strong>מקדמה ששולמה:</strong> <span>${advancePaid.toFixed(2)} ₪</span></p>
+                                    ${eventDayPaymentTotalForExport > 0 ? `<p><strong>סכום ששולם באירוע:</strong> <span>${eventDayPaymentTotalForExport.toFixed(2)} ₪</span></p>` : ''}
+                                    ${mainPaidForExport > 0 ? `<p class="summary-detail-item"><strong>- מתוכו שולם כללי:</strong> <span>${mainPaidForExport.toFixed(2)} ₪</span></p>` : ''}
+                                    ${groomPaidForExport > 0 ? `<p class="summary-detail-item"><strong>- מתוכו שולם ע"י צד חתן:</strong> <span>${groomPaidForExport.toFixed(2)} ₪</span></p>` : ''}
+                                    ${bridePaidForExport > 0 ? `<p class="summary-detail-item"><strong>- מתוכו שולם ע"י צד כלה:</strong> <span>${bridePaidForExport.toFixed(2)} ₪</span></p>` : ''}
+                                    <p><strong>סה"כ שולם (מקדמה + באירוע):</strong> <span>${totalPaid.toFixed(2)} ₪</span></p>
+                                    <p class="balance-due"><strong>יתרה לתשלום:</strong> <span>${balanceDue.toFixed(2)} ₪</span></p>
+                                </div>
+
+                                ${quoteNotes ? `
+                                <div class="notes-section">
+                                    <h2 class="section-title">הערות</h2>
+                                    <pre>${quoteNotes}</pre>
+                                </div>` : ''}
+
+                                <div class="footer">
+                                    הצעת מחיר זו הופקה בתאריך ${new Date().toLocaleDateString('he-IL')}.
+                                </div>
+                            </div>
+                        </body>
+                        </html>
+                    `;
+
+                    // For filename, use client name and current date/time to ensure uniqueness and readability
+                    const clientNameForFile = clientNameValue.replace(/[^a-zA-Z0-9א-ת\s]/g, '').replace(/\s+/g, '_') || 'לקוח';
+                    const now = new Date();
+                    const timestampForFile = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}-${now.getSeconds().toString().padStart(2, '0')}`;
+                    const fileName = `הצעת_מחיר_${clientNameForFile}_${timestampForFile}.html`;
+
+                    const htmlBlob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+                    const htmlLink = document.createElement('a');
+                    htmlLink.href = URL.createObjectURL(htmlBlob);
+                    htmlLink.download = fileName;
+                    document.body.appendChild(htmlLink);
+                    htmlLink.click();
+                    document.body.removeChild(htmlLink);
+                    URL.revokeObjectURL(htmlLink.href);
+
+                    showFeedback('קובץ HTML של ההצעה נוצר והורד!', 'success', 3500);
+
+                    // ניסיון להציג אפשרות שיתוף מובנית של המכשיר (Web Share API)
+                    // יש לזכור שתמיכה ב-Web Share API (ובמיוחד שיתוף קבצים) מוגבלת.
+                    if (navigator.share) {
+                        const file = new File([htmlBlob], fileName, { type: 'text/html' });
+                        navigator.share({
+                            title: `הצעת מחיר מ-${appSettings.businessName || 'העסק שלך'} עבור ${clientNameValue}`,
+                            text: `מצורפת הצעת מחיר עבורך: ${clientNameValue}`,
+                            files: [file], // שיתוף קבצים נתמך פחות מאשר טקסט/URL
+                        })
+                        .then(() => console.log('שיתוף קובץ הצעה בוצע בהצלחה.'))
+                        .catch((error) => console.error('שגיאה בשיתוף קובץ הצעה:', error));
+                    } else {
+                        // אם Web Share API אינו נתמך, ניתן להציע אפשרות לשלוח קישור או להדריך לשיתוף ידני
+                        showFeedback('הקובץ הורד לתיקיית ההורדות שלך. תוכל לשתף אותו משם.', 'info', 6000);
+                        // ניתן להוסיף כאן אפשרות לפתוח חלון עם הוראות שיתוף ידניות או קישור לשליחה במייל
+                        // לדוגמה: window.open(`mailto:?subject=${encodeURIComponent('הצעת מחיר')}&body=${encodeURIComponent('מצורפת ההצעה...')}`);
+                    }
+                });
+            }
+
+
+            addToGoogleCalendarBtn.addEventListener('click', () => {
+                const clientName = clientNameInput.value.trim();
+                const eventDate = eventDateInput.value;
+                const venue = venueNameInput.value.trim();
+                const notes = quoteNotesEl.value.trim();
+
+                if (!eventDate) {
+                    showFeedback('יש לבחור תאריך לאירוע.', 'error');
+                    return;
+                }
+                
+                const selectedServicesData = serviceItems
+                    .filter(item => item.selected)
+                    .map(item => `${item.name} (x${item.quantity || 1}) - ${(item.price * (item.quantity || 1)).toFixed(2)} ₪`);
+                
+                const baseServicesTotal = calculateCurrentServicesTotal();
+                
+                let additionalEventCosts = 0;
+                if (currentlyLoadedQuoteData && editingQuoteId && currentlyLoadedQuoteData.additionalEventCosts) {
+                    additionalEventCosts = parseFloat(currentlyLoadedQuoteData.additionalEventCosts) || 0;
+                }
+                
+                const finalTotal = baseServicesTotal + additionalEventCosts;
+                
+                let servicesSummary = "שירותים נבחרים:\n";
+                if (selectedServicesData.length > 0) {
+                    servicesSummary += selectedServicesData.join("\n");
+                } else {
+                    servicesSummary += "לא נבחרו שירותים.";
+                }
+                
+                servicesSummary += `\n\nסה"כ עלות שירותים בסיסית: ${baseServicesTotal.toFixed(2)} ₪`;
+                
+                if (additionalEventCosts > 0) {
+                    servicesSummary += `\nעלויות נוספות (שעות/הוצאות): ${additionalEventCosts.toFixed(2)} ₪`;
+                }
+                
+                servicesSummary += `\nסה"כ לתשלום: ${finalTotal.toFixed(2)} ₪`;
+                
+                const title = `אירוע: ${clientName || 'לקוח'} ${venue ? `- ${venue}` : ''}`;
+                const details = `פרטי הצעת מחיר.\nלקוח: ${clientName || 'לא ידוע'}\nמקום: ${venue || 'לא צוין'}\n\n${servicesSummary}\n\nהערות נוספות מההצעה:\n${notes}`;
+                const startDate = eventDate.replace(/-/g, ''); // FormatYYYYMMDD
+                
+                // For Google Calendar, if it's an all-day event, end date should be the next day.
+                const endDateObj = new Date(eventDate + "T00:00:00");
+                endDateObj.setDate(endDateObj.getDate() + 1);
+                const formattedEndDate = endDateObj.toISOString().slice(0,10).replace(/-/g, ''); // FormatYYYYMMDD
+                
+                const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${formattedEndDate}&details=${encodeURIComponent(details)}${venue ? `&location=${encodeURIComponent(venue)}` : ''}`;
+                
+                window.open(calendarUrl, '_blank');
+                showFeedback('פותח חלון להוספת האירוע ליומן גוגל.', 'info');
+            });
+
+            exportDataBtn.addEventListener('click', () => {
+                try {
+                    const allQuotes = getSavedQuotesFromStorage();
+                    const dataToExport = {
+                        appSettings: appSettings,
+                        serviceItemsConfiguration: serviceItems.map(item => ({ // Store only essential config
+                            id: item.id,
+                            name: item.name,
+                            price: item.price
+                            // No need to store selected/quantity in the *configuration* export
+                        })),
+                        calculationSettings: calculationSettings,
+                        savedQuotes: allQuotes // Full quotes with their selected services, quantities etc.
+                    };
+                    
+                    const dataStr = JSON.stringify(dataToExport, null, 2); // Pretty print JSON
+                    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+                    
+                    const now = new Date();
+                    const exportFileDefaultName = `quote_backup_${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}-${now.getMinutes().toString().padStart(2, '0')}-${now.getSeconds().toString().padStart(2, '0')}.json`;
+                    
+                    const linkElement = document.createElement('a');
+                    linkElement.setAttribute('href', dataUri);
+                    linkElement.setAttribute('download', exportFileDefaultName);
+                    linkElement.click();
+                    
+                    showFeedback('הנתונים יוצאו בהצלחה!', 'success');
+                } catch (e) {
+                    console.error("Error exporting data:", e);
+                    showFeedback('שגיאה בייצוא הנתונים.', 'error');
+                }
+            });
+
+            importFileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            // First validate the JSON is valid
+                            JSON.parse(e.target.result); // Try parsing to catch errors early
+                            importedFileContent = e.target.result; // Store if valid
+                            showFeedback(`קובץ "${file.name}" נטען בהצלחה. לחץ "טען נתונים" כדי לייבא.`, 'success', 5000);
+                        } catch (parseError) {
+                            console.error("Invalid JSON file:", parseError);
+                            showFeedback('קובץ לא תקין - אינו בפורמט JSON נכון.', 'error');
+                            importedFileContent = null; // Clear if invalid
+                            importFileInput.value = ''; // Reset file input
+                        }
+                    };
+                    reader.onerror = (e) => {
+                        console.error("Error reading file for import:", e);
+                        showFeedback('שגיאה בקריאת קובץ הייבוא.', 'error');
+                        importedFileContent = null;
+                        importFileInput.value = '';
+                    };
+                    reader.readAsText(file);
+                } else {
+                    importedFileContent = null; // No file selected
+                }
+            });
+
+            importDataBtn.addEventListener('click', () => {
+                if (!importedFileContent) {
+                    showFeedback('יש לבחור תחילה קובץ גיבוי לייבוא.', 'warning');
+                    return;
+                }
+                
+                if (!confirm("האם אתה בטוח שברצונך לייבא נתונים? פעולה זו תחליף את כל ההגדרות וההצעות הקיימות.")) {
+                    importedFileContent = null; // Clear content if user cancels
+                    importFileInput.value = ''; // Reset file input
+                    return;
+                }
+                
+                try {
+                    const importedData = JSON.parse(importedFileContent);
+                    
+                    // Basic validation of imported structure
+                    if (!importedData || typeof importedData !== 'object') {
+                        throw new Error("קובץ הייבוא פגום או בפורמט לא נתמך.");
+                    }
+                    
+                    // Validate the imported data structure more thoroughly
+                    if (!importedData.appSettings || !importedData.serviceItemsConfiguration || !importedData.savedQuotes) {
+                         // Calculation settings might be optional for older backups
+                        throw new Error("קובץ הייבוא חסר נתונים נדרשים (הגדרות, שירותים או הצעות).");
+                    }
+                    
+                    // Apply imported settings
+                    if (importedData.appSettings && typeof importedData.appSettings === 'object') {
+                        appSettings = {
+                            logoDataUrl: importedData.appSettings.logoDataUrl || '',
+                            businessName: importedData.appSettings.businessName || '',
+                            businessPhone: importedData.appSettings.businessPhone || '',
+                            businessEmail: importedData.appSettings.businessEmail || ''
+                        };
+                        // Update UI elements in settings modal if it were open, or rely on next open
+                        businessNameInput.value = appSettings.businessName;
+                        businessPhoneInput.value = appSettings.businessPhone;
+                        businessEmailInput.value = appSettings.businessEmail;
+                        if (appSettings.logoDataUrl) {
+                            logoPreview.src = appSettings.logoDataUrl;
+                            logoPreview.style.display = 'block';
+                        } else {
+                            logoPreview.src = '#';
+                            logoPreview.style.display = 'none';
+                        }
+                    } else { // Default if missing
+                        appSettings = { logoDataUrl: '', businessName: '', businessPhone: '', businessEmail: '' };
+                    }
+                    
+                    if (Array.isArray(importedData.serviceItemsConfiguration)) {
+                        serviceItems = importedData.serviceItemsConfiguration.map(item => ({
+                            id: item.id || `service_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // Ensure ID exists
+                            name: item.name,
+                            price: parseFloat(item.price) || 0,
+                            selected: false, // Import config only, not runtime state
+                            quantity: 1      // Import config only
+                        }));
+                    } else { // Default if missing or wrong type
+                        serviceItems = JSON.parse(JSON.stringify(defaultServiceItems));
+                    }
+                    
+                    if (importedData.calculationSettings && typeof importedData.calculationSettings === 'object') {
+                        calculationSettings = {
+                            standardWorkHours: parseFloat(importedData.calculationSettings.standardWorkHours) || 8,
+                            overtimeRate: parseFloat(importedData.calculationSettings.overtimeRate) || 150
+                        };
+                    } else { // Default if missing
+                        calculationSettings = { standardWorkHours: 8, overtimeRate: 150 };
+                    }
+                    
+                    saveServiceConfiguration(); // Save imported configurations to localStorage
+                    
+                    if (Array.isArray(importedData.savedQuotes)) {
+                        localStorage.setItem('savedQuotes', JSON.stringify(importedData.savedQuotes));
+                    } else { // Default if missing or wrong type
+                        localStorage.setItem('savedQuotes', JSON.stringify([]));
+                    }
+                    
+                    showFeedback('הנתונים יובאו בהצלחה! המערכת תתעדכן.', 'success');
+                    populatePriceSettingsInModal(); // Refresh settings modal UI
+                    renderServices();               // Refresh main services UI
+                    renderSavedQuotesList();        // Refresh saved quotes list
+                    resetQuoteForm();               // Clear the current form
+                    
+                } catch (e) {
+                    console.error("Error importing data:", e);
+                    showFeedback(`שגיאה בייבוא הנתונים: ${e.message}`, 'error', 7000);
+                } finally {
+                    importedFileContent = null; // Clear imported content
+                    importFileInput.value = ''; // Reset file input
+                }
+            });
+            
+            function populateCalculationSettingsModal() {
+                standardWorkHoursInput.value = calculationSettings.standardWorkHours;
+                overtimeRateInput.value = calculationSettings.overtimeRate;
+            }
+
+            calculationSettingsBtn.addEventListener('click', () => {
+                populateCalculationSettingsModal();
+                openModal(calculationSettingsModal);
+            });
+
+            saveCalculationSettingsBtn.addEventListener('click', () => {
+                const stdHours = parseFloat(standardWorkHoursInput.value);
+                const otRate = parseFloat(overtimeRateInput.value);
+                
+                if (isNaN(stdHours) || stdHours < 0 || isNaN(otRate) || otRate < 0) {
+                    showFeedback("ערכים לא חוקיים בהגדרות החישוב.", "error");
+                    return;
+                }
+                
+                calculationSettings.standardWorkHours = stdHours;
+                calculationSettings.overtimeRate = otRate;
+                
+                saveServiceConfiguration(); // Persist changes
+                closeModal(calculationSettingsModal);
+                showFeedback("הגדרות חישוב שכר נשמרו.", "success");
+            });
+
+            function calculateEventHoursAndWage(updateDisplay = true) {
+                const startTimeStr = eventStartTimeInput.value;
+                const endTimeStr = eventEndTimeInput.value;
+                
+                if (!startTimeStr || !endTimeStr) {
+                    if (updateDisplay) {
+                        totalEventHoursDisplay.textContent = "0";
+                        regularHoursDisplay.textContent = "0";
+                        overtimeHoursDisplay.textContent = "0";
+                        calculatedPhotographerWageDisplay.textContent = "0";
+                    }
+                    return { totalHours: 0, regularHours: 0, overtimeHours: 0, wage: 0 };
+                }
+                
+                const startDate = new Date(`1970-01-01T${startTimeStr}`);
+                let endDate = new Date(`1970-01-01T${endTimeStr}`);
+                
+                if (endDate < startDate) { // Handle overnight events
+                    endDate.setDate(endDate.getDate() + 1);
+                }
+                
+                const diffMillis = endDate - startDate;
+                const totalHours = diffMillis / (1000 * 60 * 60);
+                
+                let regularHours = 0;
+                let overtimeHours = 0;
+                
+                if (totalHours > calculationSettings.standardWorkHours) {
+                    regularHours = calculationSettings.standardWorkHours;
+                    overtimeHours = totalHours - calculationSettings.standardWorkHours;
+                } else {
+                    regularHours = totalHours;
+                    overtimeHours = 0;
+                }
+                
+                regularHours = Math.max(0, regularHours); // Ensure non-negative
+                overtimeHours = Math.max(0, overtimeHours); // Ensure non-negative
+                
+                // const travelCost = parseFloat(eventTravelCostInput.value) || 0; // Removed
+                const extrasCost = parseFloat(eventExtrasCostInput.value) || 0;
+                const wage = (overtimeHours * calculationSettings.overtimeRate) + extrasCost; // Wage is additional cost to client here
+                
+                if (updateDisplay) {
+                    totalEventHoursDisplay.textContent = totalHours.toFixed(2);
+                    regularHoursDisplay.textContent = regularHours.toFixed(2);
+                    overtimeHoursDisplay.textContent = overtimeHours.toFixed(2);
+                    calculatedPhotographerWageDisplay.textContent = wage.toFixed(2);
+                }
+                
+                return {
+                    totalHours: totalHours.toFixed(2),
+                    regularHours: regularHours.toFixed(2),
+                    overtimeHours: overtimeHours.toFixed(2),
+                    wage: wage.toFixed(2) // This is the additional cost to the client
+                };
+            }
+
+            // Update calculation when relevant inputs change
+            [eventStartTimeInput, eventEndTimeInput, eventExtrasCostInput, amountPaidToPhotographerInput, paymentGroomSideInput, paymentBrideSideInput].forEach(input => {
+                if (input) { // Check if input exists (e.g. eventTravelCostInput was removed)
+                    input.addEventListener('change', () => calculateEventHoursAndWage()); // For time, direct change
+                    input.addEventListener('input', () => calculateEventHoursAndWage()); // For numbers, as user types
+                }
+            });
+
+
+            if (calculatePhotographerWageBtn) {
+                calculatePhotographerWageBtn.addEventListener('click', () => calculateEventHoursAndWage());
+            }
+
+            function openEventWageModal(quoteId, clientName) {
+                currentQuoteIdForWageInput.value = quoteId;
+                eventWageModalTitle.textContent = `חישוב שכר ותשלום לאירוע של: ${clientName || 'לקוח לא ידוע'}`;
+                
+                // Reset fields
+                eventStartTimeInput.value = '';
+                eventEndTimeInput.value = '';
+                // eventTravelCostInput.value = '0'; // Removed
+                eventExtrasCostInput.value = '0';
+                signatoryNameInput.value = '';
+                amountPaidToPhotographerInput.value = '0';
+                paymentGroomSideInput.value = '0';
+                paymentBrideSideInput.value = '0';
+
+                
+                calculatedPhotographerWageDisplay.textContent = '0';
+                totalEventHoursDisplay.textContent = '0';
+                regularHoursDisplay.textContent = '0';
+                overtimeHoursDisplay.textContent = '0';
+                
+                savedSignatureImage.src = '#';
+                savedSignatureImage.style.display = 'none';
+                noSignatureMessage.style.display = 'block';
+                currentSignatureDataUrl = null; // Reset current signature data
+                
+                const savedQuotes = getSavedQuotesFromStorage();
+                const quote = savedQuotes.find(q => q.id == quoteId);
+                
+                if (quote) {
+                    if (quote.wageDetails) {
+                        eventStartTimeInput.value = quote.wageDetails.startTime || '';
+                        eventEndTimeInput.value = quote.wageDetails.endTime || '';
+                        // eventTravelCostInput.value = quote.wageDetails.travelCost || '0'; // Removed
+                        eventExtrasCostInput.value = quote.wageDetails.extrasCost || '0';
+                        signatoryNameInput.value = quote.wageDetails.signatoryName || '';
+                        
+                        // Load payment breakdown
+                        amountPaidToPhotographerInput.value = quote.wageDetails.paymentMain !== undefined ? quote.wageDetails.paymentMain : '0'; // Load general payment
+                        paymentGroomSideInput.value = quote.wageDetails.paymentGroomSide !== undefined ? quote.wageDetails.paymentGroomSide : '0'; // Load groom payment
+                        paymentBrideSideInput.value = quote.wageDetails.paymentBrideSide !== undefined ? quote.wageDetails.paymentBrideSide : '0'; // Load bride payment
+
+                        if (quote.wageDetails.signatureImage) {
+                            savedSignatureImage.src = quote.wageDetails.signatureImage;
+                            savedSignatureImage.style.display = 'block';
+                            noSignatureMessage.style.display = 'none';
+                            currentSignatureDataUrl = quote.wageDetails.signatureImage; // Preserve loaded signature
+                        }
+                    } else {
+                         // If no wageDetails, but there is an eventPaymentAmount (from older versions or direct edit)
+                         // We can't reliably split it, so initialize detailed fields to 0 or the total in main field
+                        amountPaidToPhotographerInput.value = quote.eventPaymentAmount || '0'; // If old quote has only total, put in main
+                        paymentGroomSideInput.value = '0';
+                        paymentBrideSideInput.value = '0';
+                    }
+                    
+                    // If wageDetails.paymentMain is not set, but eventPaymentAmount is,
+                    // and groom/bride are 0, put total in paymentMain for backward compatibility.
+                    // This logic is mostly handled by the loading above now.
+
+                    calculateEventHoursAndWage(); // Recalculate based on loaded values
+                }
+                
+                openModal(eventWageModal);
+            }
+
+            if (openSignaturePadBtn) {
+                openSignaturePadBtn.addEventListener('click', () => {
+                    const signatory = signatoryNameInput.value.trim();
+                    const paymentMain = parseFloat(amountPaidToPhotographerInput.value || 0);
+                    const paymentGroom = parseFloat(paymentGroomSideInput.value || 0);
+                    const paymentBride = parseFloat(paymentBrideSideInput.value || 0);
+                    const totalEventPayment = paymentMain + paymentGroom + paymentBride;
+                    
+                    if (!signatory) {
+                        showFeedback("יש להזין שם חותם לפני פתיחת חלון חתימה.", "error");
+                        signatoryNameInput.focus();
+                        return;
+                    }
+                    
+                    if (signatureModalSignatoryName) {
+                        signatureModalSignatoryName.textContent = signatory;
+                    }
+                    
+                    if (signatureModalAmountPaid) {
+                        signatureModalAmountPaid.textContent = totalEventPayment.toLocaleString() + " ₪";
+                    }
+                    
+                    if (signatureModalTimestamp) {
+                        signatureModalTimestamp.textContent = new Date().toLocaleString('he-IL');
+                    }
+                    
+                    if (signatureCanvas && signatureCanvas.getContext('2d')) {
+                        signatureCanvas.getContext('2d').clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+                    }
+                    
+                    openModal(signatureModal);
+                });
+            }
+
+            if (saveEventWageDetailsBtn) {
+                saveEventWageDetailsBtn.addEventListener('click', () => {
+                    const quoteId = currentQuoteIdForWageInput.value;
+                    
+                    if (!quoteId) {
+                        showFeedback("שגיאה: לא זוהתה הצעה.", "error");
+                        return;
+                    }
+                    
+                    const wageData = calculateEventHoursAndWage(false); // Get calculated values without updating UI again
+                    const calculatedAdditionalCostForClient = parseFloat(wageData.wage) || 0;
+                    
+                    const paymentMainVal = parseFloat(amountPaidToPhotographerInput.value) || 0;
+                    const paymentGroomVal = parseFloat(paymentGroomSideInput.value) || 0;
+                    const paymentBrideVal = parseFloat(paymentBrideSideInput.value) || 0;
+                    // Total event day payment made by client (sum of all three fields)
+                    const eventDayPaymentMadeByClient = paymentMainVal + paymentGroomVal + paymentBrideVal;
+                    
+                    let sigTimestamp = null;
+                    // Logic for signature timestamp: if new signature, new timestamp. If existing, keep old.
+                    const savedQuotesForSigCheck = getSavedQuotesFromStorage();
+                    const originalQuoteForSigCheck = savedQuotesForSigCheck.find(q => q.id == quoteId);
+                    
+                    if (currentSignatureDataUrl) { // If there's a signature (new or loaded)
+                        const originalSignatureImage = originalQuoteForSigCheck?.wageDetails?.signatureImage;
+                        if (currentSignatureDataUrl !== originalSignatureImage) { // If signature changed or is new
+                            sigTimestamp = new Date().toISOString();
+                        } else { // Signature is the same as what was loaded
+                            sigTimestamp = originalQuoteForSigCheck?.wageDetails?.signatureTimestamp;
+                        }
+                    }
+                    
+                    const wageDetailsToSave = {
+                        startTime: eventStartTimeInput.value,
+                        endTime: eventEndTimeInput.value,
+                        // travelCost: parseFloat(eventTravelCostInput.value) || 0, // Removed
+                        extrasCost: parseFloat(eventExtrasCostInput.value) || 0,
+                        totalHours: wageData.totalHours,
+                        regularHoursWorked: wageData.regularHours,
+                        overtimeHoursWorked: wageData.overtimeHours,
+                        calculatedWageForBusiness: wageData.wage, // This is the additional cost part
+                        signatoryName: signatoryNameInput.value.trim(),
+                        signatureImage: currentSignatureDataUrl, // Store current signature (new or re-saved)
+                        signatureTimestamp: sigTimestamp,
+                        paymentMain: paymentMainVal,          // Store main payment separately
+                        paymentGroomSide: paymentGroomVal,    // Store groom side payment separately
+                        paymentBrideSide: paymentBrideVal     // Store bride side payment separately
+                    };
+                    
+                    let savedQuotes = getSavedQuotesFromStorage();
+                    const quoteIndex = savedQuotes.findIndex(q => q.id == quoteId);
+                    
+                    if (quoteIndex > -1) {
+                        // Ensure wageDetails object exists before spreading
+                        savedQuotes[quoteIndex].wageDetails = {
+                            ...(savedQuotes[quoteIndex].wageDetails || {}), // Preserve any other existing wage details
+                            ...wageDetailsToSave
+                        };
+                        
+                        savedQuotes[quoteIndex].additionalEventCosts = calculatedAdditionalCostForClient;
+                        savedQuotes[quoteIndex].eventPaymentAmount = eventDayPaymentMadeByClient; // Update total event day payment based on the sum
+                        
+                        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+                        
+                        // If the currently edited quote is the one being updated for wage, refresh its data
+                        if (editingQuoteId == quoteId) {
+                            currentlyLoadedQuoteData = JSON.parse(JSON.stringify(savedQuotes[quoteIndex]));
+                            updateSummaryDisplay(); // Update the main summary on the page
+                        }
+                        
+                        showFeedback("פרטי עלויות, תשלום וחתימה נשמרו בהצעה!", "success");
+                        closeModal(eventWageModal);
+                        renderSavedQuotesList(searchSavedQuotesInput.value); // Refresh list of saved quotes
+                    } else {
+                        showFeedback("שגיאה: לא נמצאה הצעה לעדכון.", "error");
+                    }
+                });
+            }
+
+            // Global click listener for closing modals by clicking outside
+            window.addEventListener('click', (event) => {
+                if (event.target.classList.contains('modal')) {
+                    closeModal(event.target);
+                }
+            });
+
+            // Global keydown listener for Esc key to close modals
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    const openModals = document.querySelectorAll('.modal[style*="display: block"]');
+                    openModals.forEach(modal => closeModal(modal));
+                }
+            });
+
+            // Initial Load
+            try {
+                loadServiceConfiguration();
+                renderServices();
+                renderSavedQuotesList();
+                resetQuoteForm(); // Start with a clean form
+                startAutoSave(); // Start auto-save interval
+            } catch (error) {
+                console.error("CRITICAL ERROR DURING INITIAL LOAD:", error);
+                alert("אירעה שגיאה קריטית בטעינת האפליקציה. אנא בדוק את הקונסול (F12) וצור קשר עם התמיכה.");
+                // Potentially log to a remote service if available
+            }
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
+                </body>
+                </html>
+            
